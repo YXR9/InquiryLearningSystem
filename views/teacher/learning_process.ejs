@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>科學探究學習系統</title>
+        <!-- <%- include ../cdn.html %>         -->
+        <!-- fontaweson -->
+        <script src="https://kit.fontawesome.com/b9afe6cc19.js" crossorigin="anonymous"></script>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <!-- 自定義CSS -->
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+        <!-- jquery -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+        <!-- Vis.js -->
+        <script type="text/javascript" src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script> 
+        <link href="https://unpkg.com/vis-network@latest/dist/vis-network.min.css" rel="stylesheet" type="text/css" /> 
+        <!-- bootstrap -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <!-- Chart.js -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>    
+    </head>
+    <body>
+        <%- include ./group_navbar.html %>
+        <div class="container-fluid" id="mainfuncNavBlank"></div>
+        <div class="container">
+            <div class="row analysis">
+                <div class="col">
+                    <div class="card analysisCard" id="ideaAction">
+                        <div class="card-header">個人想法貢獻數量</div>
+                        <div class="card-body"><canvas id='ideaActionCanvas'></canvas></div>
+                        <div class="card-footer"></div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card analysisCard" id="ideaScaffold">
+                        <div class="card-header">想法鷹架使用</div>
+                        <div class="card-body"><canvas id='ideaScaffoldCanvas'></canvas></div>
+                        <div class="card-footer"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row analysis">
+                <div class="col" id="ideaIncrease">
+                    <div class="card analysisCard" id="ideaIncrease">
+                        <div class="card-header">個人想法貢獻數量變化</div>
+                        <div class="card-body">
+                            <div id="ideaIncreaseGraph"></div>
+                        </div>
+                        <div class="card-footer"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div id="ideaIncrease"></div>
+            </div>
+            <div class="row">
+                <div id="socialNetwork"></div>
+            </div>
+        </div>        
+        <div id="activityId" style="display: none;"><%= activityId %></div>
+        <div id="groupId" style="display: none;"><%= groupId %></div>
+        <div id="memberId" style="display: none;"><%= memberId %></div>
+        <div id="memberName" style="display: none;"><%= memberName %></div>
+        <div id="memberIdentity" style="display: none;"><%= memberIdentity %></div>
+        <div id="ideaActionData" style="display: none;"><%= ideaActionData %></div>
+        <div id="ideaScaffoldData" style="display: none;"><%= ideaScaffoldData %></div>
+        <div id="ideaIncreaseData" style="display: none;"><%= ideaIncreaseData %></div>
+        <script src="/socket.io/socket.io.js"></script>
+        <script type="text/javascript" src="/javascripts/join_socket_room.js"></script>      
+        <script src="/javascripts/group_learning_process.js"></script>
+    </body>
+</html>

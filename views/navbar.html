@@ -1,0 +1,30 @@
+<!-- 最上方導覽列 -->
+<nav class="navbar navbar-expand-lg navbar-dark navbar-expand fixed-top" id="main-nav">
+    <a href="/teacher" class="navbar-brand"><i class="fas fa-home"></i>  科學探究學習系統</a>
+    <a href="/teacher/group_manager?activityId=<%= activityId %>" class="navbar-brand"><i class="fas fa-angle-right"></i> <%= activityTitle %> </a>
+    <a href="#" class="navbar-brand"><i class="fas fa-angle-right"></i> <%= groupName %> </a>
+    <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+        <li class="nav-item">
+            <a href="#" class="navbar-brand"><%= memberName %>  老師</a>
+        </li>
+        <li class="nav-item">
+            <a href="/logout" class="navbar-brand"><i class="fas fa-sign-out-alt"></i>登出</a>
+        </li>        
+    </ul>
+</nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-expand fixed-top" id="func-nav">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="/group">活動面板 <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/practive_result">實作成果</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/activity_analysis">活動分析</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/file">資源管理</a>
+        </li>
+    </ul>
+</nav>

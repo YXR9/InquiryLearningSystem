@@ -1,0 +1,29 @@
+<!-- 最上方導覽列 -->
+<nav class="navbar navbar-expand-lg navbar-dark navbar-expand fixed-top" id="main-nav">
+    <a href="/" class="navbar-brand"><i class="fas fa-home"></i>  科學探究學習系統</a>
+    <a href="#" class="navbar-brand"><i class="fas fa-angle-right"></i> <%= activityTitle %> </a>
+    <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+        <li class="nav-item">
+            <a href="#" class="navbar-brand"><%= memberName %>  老師</a>
+        </li>
+        <li class="nav-item">
+            <a href="/logout" class="navbar-brand"><i class="fas fa-sign-out-alt"></i>登出</a>
+        </li>        
+    </ul>
+</nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-expand fixed-top" id="func-nav">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" id="goGroupManager" href="/teacher/group_manager">組別管理 </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="goBroadcast" href="/teacher/broadcast">小組廣播</a>
+        </li>
+        <!-- <li class="nav-item">
+            <a class="nav-link" id="goActivityAnalysis" href="/teacher/activity_analysis">小組想法分析</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="goActivityPracticeResult" href="/teacher/practice_result">小組實作成果</a>
+        </li> -->
+    </ul>
+</nav>

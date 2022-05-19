@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>科學探究學習系統</title>
+    <script src="https://kit.fontawesome.com/b9afe6cc19.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+  </head>
+  <body>
+    <!-- 最上方導覽列 -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-expand fixed-top" id="index-nav">
+        <a href="#" class="navbar-brand"><i class="fas fa-home"></i>  科學探究學習系統</a>        
+    </nav>
+    <div class="container-fluid" id="index-container">
+      <div class="row justify-content-between align-items-center">
+        <div class="card login-card">
+          <div class="card-header">
+            <nav>
+              <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-login-tab" data-toggle="tab" href="#nav-login" role="tab" aria-controls="nav-login" aria-selected="true">登入</a>
+                <a class="nav-item nav-link" id="nav-regist-tab" data-toggle="tab" href="#nav-regist" role="tab" aria-controls="nav-regist" aria-selected="false">註冊</a>
+              </div>
+            </nav>              
+          </div>
+          <div class="card-body">          
+            <div class="tab-content" id="nav-tabContent">
+              <!-- 登入表單 -->
+              <div class="tab-pane fade show active" id="nav-login" role="tabpanel" aria-labelledby="nav-login-tab">
+                <div id="login_form">
+                  <div class="form-group">
+                    <label for="loginAccount">帳號</label>
+                    <input type="text" name="loginAccount" id="loginAccount" class="form-control"/>
+                  </div>
+                  <div class="form-group">
+                    <label for="loginPassword">密碼</label>
+                    <input type="password" name="loginPassword" id="loginPassword" class="form-control"/>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <div class="custom-control custom-radio">
+                      <input type="radio" class="custom-control-input" id="loginIdentity_student" name="loginIdentity" value="學生" checked>
+                      <label class="custom-control-label" for="loginIdentity_student">學生</label>
+                    </div>
+                    <!-- <input type="radio" class="form-check-input" name="loginIdentity" id="loginIdentity_student" value="學生" checked>
+                    <label for="loginIdentity_student" class="form-check-label">學生</label> -->
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <div class="custom-control custom-radio">
+                      <input type="radio" class="custom-control-input" id="loginIdentity_teacher" name="loginIdentity" value="老師">
+                      <label class="custom-control-label" for="loginIdentity_teacher">老師</label>
+                    </div>
+                  </div>
+                  <div class="text-right">
+                    <button type="button" class="btn btn-primary" id="loginBtn">登入</button>
+                  </div>                
+                </div>
+              </div>
+              <!-- 註冊表單 -->
+              <div class="tab-pane fade" id="nav-regist" role="tabpanel" aria-labelledby="nav-regist-tab">
+                <div>
+                  <div class="form-group">
+                    <label for="registAccount">帳號</label>
+                    <input type="text" name="registAccount" id="registAccount" class="form-control"/>
+                    <small class="form-text text-muted">
+                      只能由英文字母(a~z, A~Z)、數字(0~9)或底線(_)組成
+                    </small>
+                  </div>
+                  <div class="form-group">
+                    <label for="registPassword">密碼</label>
+                    <input type="password" name="registPassword" id="registPassword" class="form-control"/>
+                    <small class="form-text text-muted">
+                      只能由英文字母(a~z, A~Z)、數字(0~9)或底線(_)組成
+                    </small>
+                  </div>                  
+                  <div class="form-row">
+                    <div class="form-group col-6">
+                      <label for="registName">姓名</label>
+                      <input type="text" name="registName" id="registName" class="form-control" placeholder="王小明"/>
+                    </div>
+                    <div class="form-group col-6">
+                      <label for="registIdentity">身分</label>
+                      <select name="registIdentity" id="registIdentity" class="form-control">
+                        <option selected>學生</option>
+                        <option>老師</option>
+                      </select>
+                    </div>                  
+                  </div>                
+                  <div class="form-row">     
+                    <div class="form-group col-6">
+                      <label for="registCity">縣市</label>
+                      <select name="registCity" id="registCity" class="form-control">
+                        <option selected>台北市</option>
+                        <option>新北市</option>
+                        <option>桃園市</option>
+                        <option>台中市</option>
+                        <option>台南市</option>
+                        <option>高雄市</option>
+                        <option>基隆市</option>
+                        <option>新竹市</option>
+                        <option>嘉義市</option>
+                        <option>新竹縣</option>
+                        <option>苗栗縣</option>
+                        <option>彰化縣</option>
+                        <option>南投縣</option>
+                        <option>雲林縣</option>
+                        <option>嘉義縣</option>
+                        <option>屏東縣</option>
+                        <option>宜蘭縣</option>
+                        <option>花蓮縣</option>
+                        <option>台東縣</option>
+                        <option>澎湖縣</option>
+                      </select>
+                    </div>             
+                    <div class="form-group col-6">
+                      <label for="registSchool">學校</label>
+                      <input type="text" name="registSchool" id="registSchool" class="form-control" placeholder="中央大學"/>
+                    </div>
+                  </div>
+                  <div class="text-right">
+                    <button class="btn btn-primary" id="registBtn">註冊</button>
+                  </div>                
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      function checkBlankInput(str){
+        if(str.length > 0) return true;
+        else return false;
+      }
+      function regexCheck(str){
+        let regex= /\w+$/;
+        return regex.test(str);
+      }
+      $('#registBtn').on('click', function(){
+        let registAccount= $('#registAccount').val().trim();
+        let registPassword= $('#registPassword').val().trim();
+        let registName= $('#registName').val().trim();
+        let registIdentity= $('#registIdentity option:selected').text();
+        let registCity= $('#registCity option:selected').text();
+        let registSchool= $('#registSchool').val().trim();
+        if(checkBlankInput(registAccount)&&checkBlankInput(registPassword)
+          &&checkBlankInput(registName)&&checkBlankInput(registSchool)
+          &&regexCheck(registAccount)&&regexCheck(registPassword)){
+          let data= {
+            registAccount: $('#registAccount').val().trim(),
+            registPassword: $('#registPassword').val().trim(),
+            registName: $('#registName').val().trim(),
+            registIdentity: $('#registIdentity option:selected').text(),
+            registCity: $('#registCity option:selected').text(),
+            registSchool: $('#registSchool').val().trim()
+          }
+          $.ajax({
+            url: '/regist',
+            type: 'GET',
+            data: data,
+            success: function(results){
+              let success= results.success;
+              console.log(data.registIdentity);
+              if(success){
+                if(data.registIdentity=='老師'){
+                  window.location.href="/teacher";
+                  return false;
+                }else{
+                  window.location.href="/student";
+                  return false;
+                }
+              }else{
+                alert('此帳號已有人註冊！');
+                $('#registAccount').val('');
+                $('#registPassword').val('');
+              }
+            },
+            error: function(){
+              alert('帳號或密碼錯誤，請重新登入');
+              $('#registAccount').val('');
+              $('#registPassword').val('');
+            }
+          });
+        }else{
+          alert('請檢察帳號密碼是否符合格式，或是有未填寫的欄位');
+          $('#registAccount').val('');
+          $('#registPassword').val('');
+        }
+      });
+      $('#loginBtn').on('click', function(){
+        if(regexCheck($('#loginAccount').val().trim())&&regexCheck($('#loginPassword').val().trim())){
+          let data= {
+            loginAccount: $('#loginAccount').val().trim(),
+            loginPassword: $('#loginPassword').val().trim(),
+            loginIdentity: $('input[name="loginIdentity"]:checked').val()
+          }
+          $.ajax({
+            url: '/login',
+            type: 'GET',
+            data: data,
+            success: function(results){
+              if(results.alreadyLogin){
+                alert('你已經登入囉！')
+                window.location.href="/";
+              }else{
+                let success= results.success;
+                console.log(data.loginIdentity);
+                if(success){
+                  if(data.loginIdentity=='老師'){
+                    window.location.href="/teacher";
+                    return false;
+                  }else{
+                    window.location.href="/student";
+                    return false;
+                  }
+                }else{
+                  alert('帳號或密碼錯誤，請重新登入');
+                  $('#loginAccount').val('');
+                  $('#loginPassword').val('');
+                }
+              }              
+            },
+            error: function(){
+              alert('帳號或密碼錯誤，請重新登入');
+              $('#loginAccount').val('');
+              $('#loginPassword').val('');
+            }
+          });
+        }else{
+          alert('請檢察帳號或密碼是否含有英文字母、數字及底線以外的字');
+        }        
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+<svg id="想法" xmlns="http://www.w3.org/2000/svg" width="50" height="54" viewBox="0 0 50 54">
+  <path id="Path_64" data-name="Path 64" d="M27,8a17,17,0,0,0-6,32.9V50a1,1,0,0,0,1,1h1v2a1,1,0,0,0,1,1h6a1,1,0,0,0,1-1V51h1a1,1,0,0,0,1-1V40.9A17,17,0,0,0,27,8Zm3,41a1,1,0,0,0-1,1v2H25V50a1,1,0,0,0-1-1H23V44h8v5Zm1.688-9.758a1,1,0,0,0-.688.95V42H23V40.192a1,1,0,0,0-.688-.95,15,15,0,1,1,9.376,0Z" transform="translate(-2 0)" fill="#eab303"/>
+  <path id="Path_65" data-name="Path 65" d="M27,6a1,1,0,0,0,1-1V1a1,1,0,0,0-2,0V5A1,1,0,0,0,27,6Z" transform="translate(-2)" fill="#eab303"/>
+  <path id="Path_66" data-name="Path 66" d="M51,24H47a1,1,0,0,0,0,2h4a1,1,0,0,0,0-2Z" transform="translate(-2 0)" fill="#eab303"/>
+  <path id="Path_67" data-name="Path 67" d="M7,24H3a1,1,0,0,0,0,2H7a1,1,0,0,0,0-2Z" transform="translate(-2 0)" fill="#eab303"/>
+  <path id="Path_68" data-name="Path 68" d="M43.264,7.322,40.436,10.15a1,1,0,1,0,1.414,1.414l2.828-2.828a1,1,0,1,0-1.414-1.414Z" transform="translate(-2 0)" fill="#eab303"/>
+  <path id="Path_69" data-name="Path 69" d="M12.15,38.436,9.322,41.264a1,1,0,1,0,1.414,1.414l2.828-2.828a1,1,0,0,0-1.414-1.414Z" transform="translate(-2 0)" fill="#eab303"/>
+  <path id="Path_70" data-name="Path 70" d="M41.85,38.436a1,1,0,0,0-1.414,1.414l2.828,2.828a1,1,0,0,0,1.414-1.414Z" transform="translate(-2 0)" fill="#eab303"/>
+  <path id="Path_71" data-name="Path 71" d="M12.15,11.564a1,1,0,1,0,1.414-1.414L10.736,7.322A1,1,0,0,0,9.322,8.736Z" transform="translate(-2 0)" fill="#eab303"/>
+  <path id="Path_72" data-name="Path 72" d="M27,13A12.013,12.013,0,0,0,15,25a1,1,0,0,0,2,0A10.011,10.011,0,0,1,27,15a1,1,0,1,0,0-2Z" transform="translate(-2 0)" fill="#eab303"/>
+</svg>

@@ -1,0 +1,495 @@
+body {
+  padding: 0px;
+  /* padding-top: 70px; 在nav下方 */
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: Microsoft JhengHei;
+}
+.row{
+  padding-bottom: 16px;
+}
+#index-container{
+  width: 100%;
+  height: 100vh;
+  /* background-color: #222; */
+  background-image: url("/images/background/p_pt_0111_ll_pt_01112.jpg");
+  background-repeat: repeat;
+  /* filter: brightness(50%); */
+}
+#index-container .row{
+  height: 100%;
+}
+#index-nav{
+  background-color: #215D71;
+}
+.login-card{
+  width: 50vw;
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.container{
+  margin-top: 1vh;
+}
+.bootstrap-table{
+  width: 100%;
+}
+.navbar#main-nav .navbar-brand{
+  font-size: 1rem;
+  border-radius: 10%;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  margin: 0px;
+  cursor: pointer;
+}
+.navbar#main-nav .navbar-brand{
+  outline: none !important;
+}
+.navbar#main-nav .navbar-brand:hover{
+  background-color: rgb(26, 73, 88);
+}
+.navbar#func-nav{
+  /* font-size: 16px; */
+  top: 6vh;
+  height: 4vh;
+  padding: 0px;
+}
+.navbar#func-nav .navbar-nav{
+  height: 4vh;
+}
+.navbar#func-nav ul li{  
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.navbar#func-nav ul li:hover{  
+  background-color: #215d714d;
+}
+.navbar#func-nav ul li.active{
+  color: #fff;
+  background-color: #215d7191;
+}
+.navbar#func-nav ul li a{
+  padding: 4px;
+}
+.navbar#func-nav ul li.active a{
+  color: white;
+}
+
+#main-nav{
+  height: 6vh;
+  background-color: #215d71;
+  font-size: 20px;
+}
+.container-fluid#mainNavBlank{
+  padding: 0px;
+  margin: 0px;
+  height: 6vh;
+}
+.container-fluid#mainfuncNavBlank{
+  padding: 0px;
+  margin: 0px;
+  height: 10vh;
+}
+.topImage{    
+  /* background-image: url("/images/background/3239.jpg"); */
+  background-size: cover;
+  min-height: 50vh;
+  background-position: center;
+  /* filter: grayscale(80%); */
+}
+.topImage#teacherActivityTopImage{    
+  background-image: url("/images/background/496.jpg");
+}
+.topImage#teacherGroupTopImage{    
+  background-image: url("/images/background/905.jpg");
+}
+.topImage#studentTopImage{    
+  background-image: url("/images/background/3239.jpg");
+}
+
+#mynetwork{
+  /* margin-top: 10vh; */
+  height: 100vh;
+  width: 100%;
+}
+canvas :focus{
+  outline: none;
+}
+/* 兩旁工具 */
+.tools{
+  width: auto;
+  height: auto;
+  position: fixed;
+  top: 15vh;
+  left: 0px;
+  z-index: 1;
+  box-shadow: 2px 2px rgba(0, 0, 0, 0.2);
+  border-radius:5px;
+  background-color: rgba(255,255,255, 0.85);
+}
+.tools >h5{
+  color: #215D71;  
+  font-weight: bold;
+}
+.tool{
+  padding: 8px;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  /* height: 4vw; */
+  height: auto;
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+.tool#keyQuestionTool:hover{
+  background-color: rgba(255, 78, 78, 0.15);
+}
+.tool#ideaTool:hover{
+  background-color: rgba(234,179,3,0.15);
+}
+.tool#directiveObservationTool:hover, .tool#operationalObservationTool:hover, .tool#experimentTool:hover{
+  background-color: rgba(48,135,167,0.15);
+}
+.tool#attachmentTool:hover{
+  background-color: rgba(0, 0, 0, 0.15);
+}
+a.tool{  
+  text-decoration: none;
+  color: #333;
+}
+.tool >img{
+  width: 3vw;
+  height: 3vw;
+  padding: 8px;
+}
+.tool >.tool-text{
+  font-size: 12px;
+  text-decoration: none;
+  margin-top: 4px;
+}
+
+.viewModal .modal-body{
+  min-height: 25vh;
+}
+.viewModal.viewPractice .modal-lg{
+  max-width: 95%;
+}
+.viewModal.viewAttachment .modal-lg{
+  max-width: 95%;
+}
+.viewModal .modal-body .practiceInfo{
+  min-height: 25vh;
+  background-color: #ccc;
+  padding-top: 10px;
+  overflow: auto;
+}
+/* 將實作說明超出div的地方隱藏 */
+.viewModal .nodeContent .practiceInfo{
+  white-space: initial;
+  overflow: scroll;
+}
+.viewModal .addRecord{
+  float: right;
+  margin-top: 4px;
+}
+.modal {
+  overflow-y:auto;
+}
+
+.btn-addFavorite {
+  color: #ff5050;
+  background-color: #ffffff;
+  border-color: #ff5050;
+}
+.btn-addFavorite:hover {
+  color: #fff;
+  background-color: #e98787;
+  border-color: #ff5050;
+}
+.btn-removeFavorite {
+  color: #fff;
+  background-color: #ff5050;
+  border-color: #ff5050;
+}
+.btn-removeFavorite:hover {
+  color: #fff;
+  background-color: #e64646;
+  border-color: #ff5050;
+}
+
+/* 實作成果 */
+#groupPracticeResults .row{
+  padding: 0px;
+  margin: 0px;
+}
+#groupPracticeResults .row .col,.col-3{
+  padding: 0px;
+  margin: 0px;
+}
+#groupPracticeResults .row .col-3 .card{
+  width: 100%;
+  border-radius: 0rem;
+  border: none;
+}
+#groupPracticeResults .row .col-3 #practiceList{
+  height: 90vh;
+  position: fixed;
+  width: 25%;  
+  padding: 0.2rem;
+  overflow: auto;
+}
+#groupPracticeResults .row .col-3 #practiceList .card{
+  width: 100%;
+}
+#groupPracticeResults .row .col-3 #practiceList .card .card-header{
+  background-color: rgb(42, 119, 145);
+}
+#groupPracticeResults .row .col-3 #practiceList .card .card-header a{
+  color: white;  
+  text-decoration: none;
+}
+#groupPracticeResults .row .col-3 .card .card-header a img{
+  max-width: 10%;
+  height: auto;
+}
+#groupPracticeResults .row .col-3 .card a.practiceMission{
+  width: 100%;
+  color: black;
+  text-decoration: none;
+}
+#groupPracticeResults .row .col-3 .card a.practiceMission .card-body{
+  border-bottom: rgba(59, 142, 170, 0.575) dashed 0.1rem;
+  height: 4vh;
+}
+#groupPracticeResults .row .col-3 .card a.practiceMission .card-body:hover{
+  background-color: rgba(59, 142, 170, 0.205);
+}
+#groupPracticeResults .row .col-9 .row.practiceCard{
+  margin-bottom: 2rem;
+}
+#groupPracticeResults .row .col-9 .row.practiceCard .card{
+  width: 100%;
+}
+#groupPracticeResults .row .col-9 .row.practiceCard .card .card-header.practiceTitle{
+  background-color: rgb(59, 142, 170);
+  color: white;
+}
+#groupPracticeResults .row .col-9 .row.practiceCard .card .card-header>img{
+  max-width: 2%;
+}
+/* #groupPracticeResults .row{
+  padding: 0px;
+  margin: 0px;
+}
+#groupPracticeResults .col-2{
+  padding: 0px;
+}
+#groupPracticeResults #practiceList{
+  background: linear-gradient(rgb(59, 142, 170),#215D71);
+  height: 100vh;
+  width: 16vw;
+  position: fixed;
+  overflow: auto;
+}
+#groupPracticeResults #practiceList .practiceType{
+  height: 8%;
+  width: 100%;
+  border: 0px;
+  padding: 2% 0% 2% 2%;
+  background-color: rgba(255, 255, 255, 0.109);
+  text-align: left;
+  color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#groupPracticeResults #practiceList img{
+  max-height: 80%;
+  max-width: 16%;
+}
+#groupPracticeResults #practiceList .practiceMission{
+  min-height: 6vh;
+  width: 100%;
+  border: 0px;
+  border-bottom: 1px rgba(255, 255, 255, 0.3) dashed;
+  padding: 4% 0% 2% 16%;
+  background-color: rgba(255, 255, 255, 0.055);
+  text-align: left;
+  color: white;
+}
+#groupPracticeResults #practiceContent{
+  overflow: auto;
+  padding: 2% 2% 0 2%;
+}
+#groupPracticeResults #practiceContent .row.practiceCard{
+  margin-bottom: 2%;
+}
+#groupPracticeResults #practiceContent .row.practiceCard .card{
+  width: 100%;
+}
+#groupPracticeResults #practiceContent .row.practiceCard .card .card-header{
+  background-color: #215D71;
+  color: white;
+}
+#groupPracticeResults #practiceContent .row.practiceCard .card .card-header.practiceTitle img{
+  max-height: 2vw;
+}
+#groupPracticeResults #practiceContent .row.practiceCard .card .card-header.practiceInfo{
+  background-color: rgb(209, 209, 209);
+  color: black;
+}
+#groupPracticeResults #practiceContent .row.practiceCard .card .card-body .practiceInfo{
+  background-color: rgb(207, 207, 207);
+}
+
+.container .row.analysis .card.analysisCard{
+  width: 100%;
+} */
+
+/* 個人空間 */
+#groupPersoanlSpace .row{
+  padding: 0px;
+  margin: 0px;
+}
+#groupPersoanlSpace .row .col{
+  padding: 0px;
+  margin: 0px;
+}
+#groupPersoanlSpace .row .col-4{
+  padding: 0px;
+  margin: 0px;
+}
+#groupPersoanlSpace .row .col .card{
+  width: 100%;
+}
+#groupPersoanlSpace .row .col-4 .card{
+  width: 100%;
+  border: none;
+}
+#groupPersoanlSpace .row .col .card .card-header{
+  color: white;
+}
+#groupPersoanlSpace .row .col-4 .card .card-header{
+  color: white;
+}
+#groupPersoanlSpace .row .col-4 .card#personalIdeaList{
+  height: 90vh;
+  position: fixed;
+  width: 33%;  
+  padding: 0.2rem;
+}
+#groupPersoanlSpace .row .col-4 .card#personalIdeaList>.card-header{
+  background-color: rgba(234,179,3,0.8);
+}
+#groupPersoanlSpace .row .col,.col-4 .card#personalIdeaList>.card-body{
+  height: 90vh;
+  padding: 0px;
+  overflow: auto;
+}
+#groupPersoanlSpace .row .col-4 .card#personalIdeaList>.card-body>.card>.card-header {
+  background-color: rgba(221, 220, 220, 0.5);
+  padding: .50rem 1.25rem;
+}
+#groupPersoanlSpace .row .col-4 .card#personalIdeaList>.card-body>.card>.card-header a{
+  color: black;
+  text-decoration: none;
+}
+#groupPersoanlSpace .row .col-4 .card#personalIdeaList>.card-body>.card>.card-header img{
+  width: 20px;
+  height: auto;
+}
+#groupPersoanlSpace .row .col .row{
+  padding: 0.2rem;
+}
+#groupPersoanlSpace .row .col .card#personalConceptMap{
+  min-height: 50vh;
+  /* padding: 0.2rem; */
+}
+#groupPersoanlSpace .row .col .card#personalConceptMap>.card-header{
+  background-color: rgba(234, 153, 3, 0.8);
+}
+#groupPersoanlSpace .row .col .card#personalConceptMap #personalConceptMapCanvas{
+  height: 45vh;
+  width: 100%;
+  outline: none;
+}
+#groupPersoanlSpace .row .col .card#personalConceptMap #personalConceptMapCanvas .vis-network{
+  outline: none;
+}
+#groupPersoanlSpace .row .col .card#personalNote{
+  min-height: 80vh;
+}
+#groupPersoanlSpace .row .col .card#personalNote>.card-header{
+  background-color: rgba(234, 134, 3, 0.8);
+}
+#groupPersoanlSpace .row .col .card#personalNote>.card-body{
+  padding: 1rem;
+}
+
+#groupFileManager .row{
+  padding: 0px;
+  margin: 0px;
+}
+#groupFileManager .row .col{
+  padding: 0px;
+  margin: 0rem;
+}
+/* #groupFileManager .row .col-1{
+  height: 88vh;
+}
+#groupFileManager .row .col-1 .row{
+  height: 100%;
+}
+#groupFileManager .row .col-1 .row a.share{
+  margin-top: 40%;
+  margin-bottom: 40%;
+} */
+#groupFileManager .row .card{
+  width: 100%;
+  overflow: auto;
+}
+#groupFileManager .row .card .card-header{
+  color: white;
+} 
+#groupFileManager .row .card#personalFile,.card#groupFile{
+  min-height: 88vh;
+}
+#groupFileManager .row .card#personalFile>.card-header{
+  background-color: rgba(130, 130, 130, 0.8);
+}
+#groupFileManager .row .card#groupFile>.card-header{
+  background-color: rgba(130, 130, 130, 0.8);
+}
+/* #groupFileManager .row .card#personalFile>.card-body{
+  min-height: 90vh;
+  padding: 0px;
+  overflow: auto;
+} */
+
+.card-header .fa.chevron {
+  transition: .3s transform ease-in-out;
+}
+.card-header .collapsed .fa.chevron {
+  transform: rotate(90deg);
+}
+button .fa.chevron {
+  transition: .3s transform ease-in-out;
+}
+button.collapsed .fa.chevron {
+  transform: rotate(90deg);
+}
+
+.popover{
+  max-width: 12rem;
+}
+.popover .popover-body{
+  padding: 0px;
+}
+.popover .popover-body .broadcastContent{
+  padding: 0.8rem;
+  border-bottom: #ccc 1px solid;
+}
+.popover .popover-body .broadcastContent.notReadMessage{
+  background-color: rgba(255, 205, 205, 0.739);
+}

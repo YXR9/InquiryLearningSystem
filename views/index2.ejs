@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>科學探究學習系統</title>
+    <script src="https://kit.fontawesome.com/b9afe6cc19.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+  </head>
+  <body>
+    <!-- 最上方導覽列 -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-expand fixed-top" id="index-nav">
+        <a href="#" class="navbar-brand"><i class="fas fa-home"></i>  科學探究學習系統</a>        
+    </nav>
+    <div class="container-fluid" id="index-container">
+      <div class="row align-items-center justify-content-center">
+        <svg id="test" width="400" height="400" viewbox="0 0 400 400">  
+            <g>
+              <path id="flask" fill="rgba(255, 255, 56, 0.1)"
+                    d="M150 0L250 0L385 360Q400 400,360 400L40 400Q0 400,15 360L150 0 Z"></path>
+            </g> 
+            <g>
+              <path id="wave" fill="rgba(189, 255, 255, .8)"
+                    d="M75 200Q100 150, 200 200Q300 250,325 200L385 360Q400 400,360 400L40 400Q0 400,15 360 Z">
+                <animate dur="3s" repeatCount="indefinite" attributeName="d" attributeType="XML"
+                         values="M75 200
+                       Q130 230, 250 200
+                       Q285 160,325 200
+                       L385 360
+                       Q400 400,360 400
+                       L40 400
+                       Q0 400,15 360 Z;
+                      M75 200
+                       Q100 200, 200 200
+                       Q300 200,325 200
+                       L385 360
+                       Q400 400,360 400
+                       L40 400
+                       Q0 400,15 360 Z;
+                        M75 200
+                       Q130 230, 250 200
+                       Q285 160,325 200
+                       L385 360
+                       Q400 400,360 400
+                       L40 400
+                       Q0 400,15 360 Z;">        
+                </animate>      
+              </path>
+            </g>
+            <g>
+              <path id="wave" fill="rgba(0, 148, 148, .5)"
+                    d="M75 200
+                       Q100 150, 200 200
+                       Q300 250,325 200
+                       L385 360
+                       Q400 400,360 400
+                       L40 400
+                       Q0 400,15 360 Z">
+                <animate dur="5s" repeatCount="indefinite" attributeName="d" attributeType="XML"
+                         values="M75 200
+                       Q100 150, 200 200
+                       Q300 250,325 200
+                       L385 360
+                       Q400 400,360 400
+                       L40 400
+                       Q0 400,15 360 Z;
+                      M75 200
+                       Q100 200, 200 200
+                       Q300 200,325 200
+                       L385 360
+                       Q400 400,360 400
+                       L40 400
+                       Q0 400,15 360 Z;
+                        M75 200
+                       Q100 150, 200 200
+                       Q300 250,325 200
+                       L385 360
+                       Q400 400,360 400
+                       L40 400
+                       Q0 400,15 360 Z;">        
+                </animate>      
+              </path>
+              <circle cx="120" cy="390" r="10" fill="rgba(255,255,255,0.8)">
+                <animate dur="4s" repeatCount="indefinite" attributeName="cy"
+                         values="390;150"></animate>
+                <animate dur="5s" repeatCount="indefinite" attributeName="fill"
+                         values="rgba(255,255,255,0.8);rgba(255,255,255,0)"></animate>
+              </circle>
+              <circle cx="150" cy="390" r="8" fill="rgba(255,255,255,0.8)">
+                <animate dur="3s" repeatCount="indefinite" attributeName="cy"
+                         values="390;150"></animate>
+                <animate dur="5s" repeatCount="indefinite" attributeName="fill"
+                         values="rgba(255,255,255,0.8);rgba(255,255,255,0)"></animate>
+              </circle>
+              <circle cx="110" cy="390" r="8" fill="rgba(255,255,255,0.8)">
+                <animate dur="5s" repeatCount="indefinite" attributeName="cy"
+                         values="390;150"></animate>
+                <animate dur="5s" repeatCount="indefinite" attributeName="fill"
+                         values="rgba(255,255,255,0.8);rgba(255,255,255,0)"></animate>
+              </circle>
+            </g>
+            <g>
+              <circle cx="200" cy="65" r="40" fill="rgb(255, 255, 56)">
+                <animate dur="3s" repeatCount="indefinite" attributeName="fill" values="rgb(255, 255, 56);rgb(255, 221, 51);rgb(255, 255, 56)"></animate>
+              </circle>
+              <path d="M 170 60 Q170 95 200 95" stroke="white" stroke-width="5" fill="none"></path>
+              <rect x="170" y="0" width="60" height="35" fill="#999"></rect>
+              <line x1="180" y1="15" x2="220" y2="15" stroke="white" stroke-width="4"></line>
+              <line x1="180" y1="25" x2="220" y2="25" stroke="white" stroke-width="4"></line>
+            </g>
+            <g>
+              <path id="flask" fill="transparent" stroke="#eee" stroke-width="16"
+                    d="M125 0
+                       H275
+                       H250
+                       L385 360
+                       Q400 400,360 400
+                       L40 400
+                       Q0 400,15 360
+                       L150 0 Z"></path>
+            </g>  
+        </svg><br>
+        <button type="button" class="btn btn-lg btn-info mr-4"  data-toggle="modal" data-target="#loginModal">登入</button>
+          <button type="button" class="btn btn-lg btn-info mr-4"  data-toggle="modal" data-target="#registModal">註冊</button>        
+      </div>
+    </div>  
+    <div class="modal" id="loginModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">登入</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                    <div class="form-group">
+                      <label for="loginAccount">帳號</label>
+                      <input type="text" name="loginAccount" id="loginAccount" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="loginPassword">密碼</label>
+                      <input type="password" name="loginPassword" id="loginPassword" class="form-control"/>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" id="loginIdentity_student" name="loginIdentity" value="學生" checked>
+                        <label class="custom-control-label" for="loginIdentity_student">學生</label>
+                      </div>
+                  </div>
+                    <div class="form-check form-check-inline">
+                      <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" id="loginIdentity_teacher" name="loginIdentity" value="老師">
+                        <label class="custom-control-label" for="loginIdentity_teacher">老師</label>
+                      </div>
+                    </div>  
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="loginBtn">登入</button>
+              </div>
+            </div>
+          </div>
+    </div>
+    <div class="modal" id="registModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">註冊</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="registAccount">帳號</label>
+                        <input type="text" name="registAccount" id="registAccount" class="form-control"/>
+                        <small class="form-text text-muted">
+                        只能由英文字母(a~z, A~Z)、數字(0~9)或底線(_)組成
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="registPassword">密碼</label>
+                        <input type="password" name="registPassword" id="registPassword" class="form-control"/>
+                        <small class="form-text text-muted">
+                        只能由英文字母(a~z, A~Z)、數字(0~9)或底線(_)組成
+                        </small>
+                    </div>                  
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="registName">姓名</label>
+                            <input type="text" name="registName" id="registName" class="form-control" placeholder="王小明"/>
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="registIdentity">身分</label>
+                            <select name="registIdentity" id="registIdentity" class="form-control">
+                                <option selected>學生</option>
+                                <option>老師</option>
+                            </select>
+                        </div>                  
+                    </div>                
+                    <div class="form-row">     
+                        <div class="form-group col-6">
+                            <label for="registCity">縣市</label>
+                            <select name="registCity" id="registCity" class="form-control">
+                                <option selected>台北市</option>
+                                <option>新北市</option>
+                                <option>桃園市</option>
+                                <option>台中市</option>
+                                <option>台南市</option>
+                                <option>高雄市</option>
+                                <option>基隆市</option>
+                                <option>新竹市</option>
+                                <option>嘉義市</option>
+                                <option>新竹縣</option>
+                                <option>苗栗縣</option>
+                                <option>彰化縣</option>
+                                <option>南投縣</option>
+                                <option>雲林縣</option>
+                                <option>嘉義縣</option>
+                                <option>屏東縣</option>
+                                <option>宜蘭縣</option>
+                                <option>花蓮縣</option>
+                                <option>台東縣</option>
+                                <option>澎湖縣</option>
+                            </select>
+                        </div> 
+                    </div>            
+                    <div class="form-group col-6">
+                        <label for="registSchool">學校</label>
+                        <input type="text" name="registSchool" id="registSchool" class="form-control" placeholder="中央大學"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="registBtn">註冊</button>
+                </div>
+            </div>
+          </div>
+    </div>      
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      function checkBlankInput(str){
+        if(str.length > 0) return true;
+        else return false;
+      }
+      function regexCheck(str){
+        let regex= /\w+$/;
+        return regex.test(str);
+      }
+      $('#registBtn').on('click', function(){
+        let registAccount= $('#registAccount').val().trim();
+        let registPassword= $('#registPassword').val().trim();
+        let registName= $('#registName').val().trim();
+        let registIdentity= $('#registIdentity option:selected').text();
+        let registCity= $('#registCity option:selected').text();
+        let registSchool= $('#registSchool').val().trim();
+        if(checkBlankInput(registAccount)&&checkBlankInput(registPassword)
+          &&checkBlankInput(registName)&&checkBlankInput(registSchool)
+          &&regexCheck(registAccount)&&regexCheck(registPassword)){
+          let data= {
+            registAccount: $('#registAccount').val().trim(),
+            registPassword: $('#registPassword').val().trim(),
+            registName: $('#registName').val().trim(),
+            registIdentity: $('#registIdentity option:selected').text(),
+            registCity: $('#registCity option:selected').text(),
+            registSchool: $('#registSchool').val().trim()
+          }
+          $.ajax({
+            url: '/regist',
+            type: 'GET',
+            data: data,
+            success: function(results){
+              let success= results.success;
+              console.log(data.registIdentity);
+              if(success){
+                if(data.registIdentity=='老師'){
+                  window.location.href="/teacher";
+                  return false;
+                }else{
+                  window.location.href="/student";
+                  return false;
+                }
+              }else{
+                alert('此帳號已有人註冊！');
+                $('#registAccount').val('');
+                $('#registPassword').val('');
+              }
+            },
+            error: function(){
+              alert('帳號或密碼錯誤，請重新登入');
+              $('#registAccount').val('');
+              $('#registPassword').val('');
+            }
+          });
+        }else{
+          alert('請檢察帳號密碼是否符合格式，或是有未填寫的欄位');
+          $('#registAccount').val('');
+          $('#registPassword').val('');
+        }
+      });
+      $('#loginBtn').on('click', function(){
+        if(regexCheck($('#loginAccount').val().trim())&&regexCheck($('#loginPassword').val().trim())){
+          let data= {
+            loginAccount: $('#loginAccount').val().trim(),
+            loginPassword: $('#loginPassword').val().trim(),
+            loginIdentity: $('input[name="loginIdentity"]:checked').val()
+          }
+          $.ajax({
+            url: '/login',
+            type: 'GET',
+            data: data,
+            success: function(results){
+              if(results.alreadyLogin){
+                alert('你已經登入囉！')
+                window.location.href="/";
+              }else{
+                let success= results.success;
+                console.log(data.loginIdentity);
+                if(success){
+                  if(data.loginIdentity=='老師'){
+                    window.location.href="/teacher";
+                    return false;
+                  }else{
+                    window.location.href="/student";
+                    return false;
+                  }
+                }else{
+                  alert('帳號或密碼錯誤，請重新登入');
+                  $('#loginAccount').val('');
+                  $('#loginPassword').val('');
+                }
+              }              
+            },
+            error: function(){
+              alert('帳號或密碼錯誤，請重新登入');
+              $('#loginAccount').val('');
+              $('#loginPassword').val('');
+            }
+          });
+        }else{
+          alert('請檢察帳號或密碼是否含有英文字母、數字及底線以外的字');
+        }        
+      });
+    </script>
+  </body>
+</html>

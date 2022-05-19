@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>科學探究學習系統</title>
+        <%- include ../cdn.html %>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-expand fixed-top" id="main-nav">
+            <a href="/" class="navbar-brand"><i class="fas fa-home"></i>  科學探究學習系統</a>
+            <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+                <li class="nav-item">
+                    <a href="#" class="navbar-brand"><%= memberName %></a>
+                </li>
+                <li class="nav-item">
+                    <a href="/logout" class="navbar-brand"><i class="fas fa-sign-out-alt"></i>登出</a>
+                </li>        
+            </ul>
+        </nav>        
+        <div class="container-fluid" id="mainNavBlank"></div>
+        <div class="container-fluid d-flex justify-content-center topImage" id="studentTopImage">
+            <button type="button" class="btn btn-light btn-lg align-self-center" data-toggle="modal" data-target="#joinGroup">加入小組</button>
+        </div>
+        <div class="container">            
+            <!-- <div class="row">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#joinGroup">加入小組</button>
+            </div> -->
+            <div class="row">
+                <table id="groupTable"
+                data-pagination="true"         
+                data-page-size="10"
+                data-page-list="[10, 25, 50, 100, 200, All]"
+                data-toggle="table">
+                    <thead>
+                        <tr>
+                            <th data-field="id" data-sortable="true">#</th>
+                            <th data-field="activityId" data-visible="false">活動ID</th>
+                            <th data-field="activityTitle" data-sortable="true">活動名稱</th>
+                            <th data-field="activityInfo" data-width="300">活動說明</th>
+                            <th data-field="groupId" data-visible="false">小組ID</th>
+                            <th data-field="groupName" data-sortable="true">小組名稱</th>
+                            <th data-field="groupMember" data-sortable="true">組員名單</th>
+                            <th data-field="activityTeacher" data-sortable="true">指導老師</th>
+                            <th data-field="activityCreateTime" data-sortable="true">活動創立時間</th>
+                            <th data-field="operate" data-formatter="groupTableFunction" data-events="operateEvents"></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <!-- 新增工具之modals -->
+        <%- include ../modals/input.html %>
+        <script type="text/javascript" src="/javascripts/checkSession.js"></script>
+        <script type="text/javascript">
+            var activityId;
+            var groupTableData = []
+            var $groupTable = $('#groupTable')
+            function groupTableFunction(value, row, index) {
+                return '<button class="btn btn-primary" id="viewGroup">參與活動</button>';
+            }
+            window.operateEvents = {                
+                'click #viewGroup': function (e, value, row, index){
+                    console.log("row.activityId: "+row.activityId+"  row.groupId: "+row.groupId);
+                    // var url="/teacher/activity?acitivity_id="+row.id;
+                    window.location.href="/group?activityId="+row.activityId+"&groupId="+row.groupId;
+                    window.event.returnValue=false;
+                }
+            }
+            function getJoinedGroup(){
+                $.ajax({
+                    url: "/data_get/student_group",
+                    type: "GET",                
+                    success: function(data){
+                        console.log(data);
+                        groupTableData.length = 0;
+                        for(let i=0; i< data.studentData.length; i++){
+                            groupTableData.push({
+                                'id': i+1,
+                                'activityId': data.teacherData[i].activity_id,
+                                'activityTitle': data.teacherData[i].activity_title,
+                                'activityInfo': data.teacherData[i].activity_info,
+                                'groupId': data.studentData[i].group_id,
+                                'groupName': data.studentData[i].group_name,
+                                'groupMember': data.studentData[i].group_members,
+                                'activityTeacher': data.teacherData[i].teacher_name,
+                                'activityCreateTime': data.teacherData[i].activity_create_time
+                            });
+                        }                        
+                        $groupTable.bootstrapTable('load', groupTableData);
+                    },
+                    error: function(){
+                        alert('/data_get/student_group 訪問失敗');
+                    }
+                });
+            }
+                       
+            $( document ).ready(function(){
+                getJoinedGroup();
+                $("#joinGroup_btn").on('click', function(event){
+                    console.log($("#joinGroupKey").val());
+                    $.ajax({
+                        url: "/data_add/join_group",
+                        type: "POST",
+                        data: {
+                            groupKey: $("#joinGroupKey").val()
+                        },
+                        success: function(data){
+                            if(data.state){
+                                alert(data.msg);
+                                getJoinedGroup();
+                            }else{
+                                alert(data.msg);
+                            }                            
+                        },
+                        error: function(){
+                            alert("Join Group Error");
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

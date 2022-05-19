@@ -1,0 +1,183 @@
+<!-- 修改關鍵提問 -->
+<div class="modal editModal" id="editKeyQuestion" tabindex="-1" role="dialog" aria-labelledby="editKeyQuestion" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">修改關鍵提問</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="form-group">
+                        <label for="keyQuestionTitle">標題</label>
+                        <input type="text" class="form-control keyQuestionTitle" name="keyQuestionTitle" placeholder="關鍵提問標題">
+                    </div>
+                    <div class="form-group">
+                        <label for="keyQuestionInfo">說明</label>
+                        <textarea class="form-control keyQuestionInfo editor" name="keyQuestionInfo" placeholder="關鍵提問說明"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="editKeyQuestion_btn">儲存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 修改想法 -->
+<div class="modal editModal" id="editIdea" tabindex="-1" role="dialog" aria-labelledby="editIdea" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">修改想法</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="form-group">
+                        <label for="ideaTitle">標題</label>
+                        <input type="text" class="form-control ideaTitle" name="ideaTitle" placeholder="想法標題">
+                    </div>
+                    <div class="row">
+                        <div class="col-3 scaffoldList d-flex justify-content-center align-items-start">
+                            <div class="btn-group-vertical"></div>
+                        </div>
+                        <div class="col-9">
+                            <div class="form-group" id="ideaContent_textarea">
+                                <textarea class="form-control ideaContent editor" name="ideaContent" placeholder="想法內容"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="editIdea_btn">儲存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 修改直接觀察(Directive Observation) -->
+<div class="modal editModal" id="editDirectiveObservation" tabindex="-1" role="dialog" aria-labelledby="editDirectiveObservation" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">修改直接觀察任務</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="form-group">
+                        <label for="directiveObservationTitle">標題</label>
+                        <input type="text" class="form-control directiveObservationTitle" name="directiveObservationTitle" placeholder="直接觀察標題">
+                    </div>
+                    <div class="form-group">
+                        <label for="directiveObservationInfo">說明</label>
+                        <textarea class="form-control directiveObservationInfo editor" name="directiveObservationInfo" placeholder="直接觀察說明"></textarea>
+                    </div>
+                    <div class="select_group"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="editDirectiveObservation_btn">儲存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 修改操作觀察(OO: Operational Observation) -->
+<div class="modal editModal practiceDesign practiceModal" id="editOperationalObservation" aria-labelledby="addOperationalObservation" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header"><!--上方標題 -->
+                <h5 class="modal-title">修改操作觀察任務</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body"><!-- 表單內容 -->
+                <div>
+                    <div class="form-group">
+                        <label for="operationalObservationTitle">標題</label>
+                        <input type="text" class="form-control operationalObservationTitle" name="operationalObservationTitle" placeholder="操作觀察標題">
+                    </div>
+                    <div class="form-group">
+                        <label for="operationalObservationInfo">說明</label>
+                        <textarea class="form-control operationalObservationInfo editor" name="operationalObservationInfo" placeholder="操作觀察說明"></textarea>
+                    </div>
+                    <hr>
+                    <h6 style="display:inline">實驗步驟</h6>
+                    <input style="display:inline; float:right;" type="button" class="btn btn-sm btn-outline-info addStep" value="增加步驟" />
+                    <table class="table table-hover stepTable">
+                        <thead>
+                            <tr>
+                                <td >#</td>
+                                <td>步驟說明</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <hr>
+                    <h6>實驗材料/器材</h6>
+                    <div class="row justify-content-between newMaterial">
+                        <div class="form-group col-6">
+                            <label for="operationalObservationMaterilName">材料/器材名稱</label>
+                            <input type="text" class="form-control newMaterialName" name="operationalObservationMaterilName" placeholder="名稱">
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="operationalObservationMaterilNumber">材料/器材數量</label>
+                            <input type="text" class="form-control newMaterialNumber" name="operationalObservationMaterilNumber" placeholder="數量">
+                        </div>
+                        <div class="form-group col-sm-2">
+                            <label for="operationalObservationMaterialAdd"></label>
+                            <input type="button" class="btn btn-sm btn-outline-info addMaterial" value="增加材料/器材" />
+                        </div>                        
+                    </div>
+                    <div class="row materials" id="operationalObservationMaterils">
+                    </div> 
+                    <div class="select_group"></div> 
+                </div>                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="editOperationalObservation_btn">儲存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 修改實驗 -->
+<div class="modal editModal practiceModal" id="editExperiment" tabindex="-1" role="dialog" aria-labelledby="editExperiment" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">修改實驗任務</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="form-group">
+                        <label for="researchProblem">研究問題</label>
+                        <input type="text" class="form-control researchProblem" name="researchProblem" placeholder="研究問題">
+                    </div>
+                    <div class="form-group">
+                        <label for="researchHypothesis">研究假設</label>
+                        <input type="text" class="form-control researchHypothesis" name="researchHypothesis" placeholder="研究假設">
+                    </div>
+                    <div class="form-group">
+                        <label for="researchMotivation">研究動機</label>
+                        <textarea class="form-control researchMotivation editor" name="researchMotivation" placeholder="研究動機"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary editNode" data-dismiss="modal" id="editExperiment_btn">創立</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<!-- 最上方導覽列 -->
+<nav class="navbar navbar-expand-lg navbar-dark navbar-expand fixed-top" id="main-nav">
+    <a href="/" class="navbar-brand"><i class="fas fa-home"></i>  科學探究學習系統 </a>
+    <!-- <a href="/teacher/group_manager?activityId=<%= activityId %>" class="navbar-brand"><i class="fas fa-angle-right"></i> <%= activityTitle %> </a> -->
+    <a href="#" class="navbar-brand"><i class="fas fa-angle-right"></i> 【 <%= activityTitle %> 】  <%= groupName %> </a>
+    <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+        <li class="nav-item">
+            <a tabindex="0" id="receiveBroadcast" class="navbar-brand" data-toggle="popover">
+                <span><i class="far fa-bell"></i></span>
+                <span class="badge badge-danger notReadCount"></span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="navbar-brand"><%= memberName %></a>
+        </li>
+        <li class="nav-item">
+            <a href="/logout" class="navbar-brand"><i class="fas fa-sign-out-alt"></i>登出</a>
+        </li>        
+    </ul>
+</nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-expand fixed-top" id="func-nav">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active align-middle px-2">
+            <a class="nav-link" id="goGroup" href="/group">活動面板 <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item align-middle px-2">
+            <a class="nav-link" id="goPracticeResult" href="">實作成果</a>
+        </li>
+        <li class="nav-item px-2">
+            <a class="nav-link" id="goLearningProcess" href="">學習歷程</a>
+        </li>
+        <li class="nav-item px-2">
+            <a class="nav-link" id="goFileManager" href="">資源管理</a>
+        </li>
+        <li class="nav-item px-2">
+            <a class="nav-link" id="goPersonalIdea" href="">個人空間</a>
+        </li>
+    </ul>
+</nav>

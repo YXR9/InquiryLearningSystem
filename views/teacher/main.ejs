@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>科學探究學習系統</title>
+        <%- include ../cdn.html %>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-expand fixed-top" id="main-nav">
+            <a href="/teacher" class="navbar-brand"><i class="fas fa-home"></i>  科學探究系統</a>
+            <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+                <li class="nav-item">
+                    <a href="#" class="navbar-brand"><%= memberName %>  老師</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/logout" class="navbar-brand"><i class="fas fa-sign-out-alt"></i>登出</a>
+                </li>        
+            </ul>
+        </nav>
+        <div class="container-fluid" id="mainNavBlank"></div>
+        <div class="container-fluid d-flex justify-content-center topImage" id="teacherActivityTopImage">
+            <button type="button" class="btn btn-light btn-lg align-self-center" data-toggle="modal" data-target="#addActivity">新增活動</button>
+        </div>
+        <div class="container">
+            <div class="row">
+                <table id="activityTable"
+                data-pagination="true"         
+                data-page-size="10"
+                data-page-list="[10, 25, 50, 100, 200, All]"
+                data-toggle="table">
+                    <thead>
+                        <tr>
+                            <th data-field="id" data-sortable="true">#</th>
+                            <th data-field="activityTitle"  data-width="300" data-sortable="true">活動名稱</th>
+                            <th data-field="activityInfo"  data-width="600" data-sortable="true">活動說明</th>
+                            <th data-field="groupCount" data-sortable="true">組別數量</th>
+                            <th data-field="memberCount" data-sortable="true">成員數量</th>
+                            <th data-field="createTime"  data-width="200" data-sortable="true">創立時間</th>
+                            <th data-field="operate" data-formatter="activityTableFunction" data-events="operateEvents"></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <!-- 新增工具之modals -->
+        <%- include ../modals/input.html %>
+        <script type="text/javascript">
+            var activityTable_data = []
+            var $activityTable = $('#activityTable')
+            function activityTableFunction(value, row, index) {
+                return '<button class="btn btn-primary" id="viewActivity">進入活動</button>';
+            }
+            window.operateEvents = {                
+                'click #viewActivity': function (e, value, row, index){
+                    console.log("row.id: "+row.id);
+                    // var url="/teacher/activity?acitivity_id="+row.id;
+                    window.location.href="/teacher/group_manager?activityId="+row.id;
+                    window.event.returnValue=false;
+                }
+            }
+            function getActivity(){
+                $.ajax({
+                    url: "/data_get/teacher_activity",
+                    type: "GET",        
+                    success: function(data){
+                        // alert(data.length);
+                        activityTable_data.length = 0;
+                        $.each(data, function(index, value){
+                            activityTable_data.push({
+                                'id': value.activity_id,
+                                'activityTitle': value.activity_title,
+                                'activityInfo': value.activity_info,
+                                'groupCount': value.group_count,
+                                'memberCount': value.member_count,
+                                'createTime': value.activity_create_time
+                            });
+                        });
+                        // alert(table_data[0].activity_title);
+                        $activityTable.bootstrapTable('load', activityTable_data);
+                    },
+                    error: function(){
+                        alert('/data_get/activity 訪問失敗');
+                    }
+                });
+            }
+            $( document ).ready(function(){
+                getActivity();
+                $("#addActivity_btn").on('click', function(e){
+                    var activityTitle = $('#activityTitle').val();
+                    var activityInfo = $('#activityInfo').val();
+                    var activityGroupNumber = $("#activityGroupNumber").val();                    
+                    $.ajax({
+                        url: "/data_add/activity",
+                        type: "POST",
+                        data: {
+                            activityTitle: activityTitle,
+                            activityInfo: activityInfo,
+                            activityGroupNumber: activityGroupNumber
+                        },
+                        success: function(data){
+                            getActivity();
+                        },
+                        error: function(){
+                            alert('新增活動失敗');
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

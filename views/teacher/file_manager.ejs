@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>科學探究學習系統</title>
+        <%- include ../cdn.html %>        
+    </head>
+    <body>
+        <%- include ./group_navbar.html %>  
+        <div class="container-fluid" id="mainfuncNavBlank"></div>      
+        <div class="continaer-fluid" id="groupFileManager">
+            <div class="row">
+                <div class="col">
+                    <div class="card" id="personalFile">
+                        <div class="card-header"><i class="fas fa-user text-light pr-1"></i>個人資源</div>
+                        <div class="card-body">
+                            <button type="button" class="btn btn-secondary btn-sm mb-2" data-toggle="modal" data-target="#uploadPersonalFile">上傳個人檔案</button>
+                            <button type="button" class="btn btn-light btn-sm mb-2" data-toggle="modal" data-target="#uploadPersonalLink">上傳個人連結</button>
+                            <table id="personalFileTable"></table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-7">  
+                    <div class="row">
+                        <div class="card" id="groupFile">
+                            <div class="card-header"><i class="fas fa-users text-light pr-1"></i>小組資源</div>
+                            <div class="card-body">
+                                <button type="button" class="btn btn-secondary btn-sm mb-2" data-toggle="modal" data-target="#uploadGroupFile">上傳小組檔案</button>
+                                <button type="button" class="btn btn-light btn-sm mb-2" data-toggle="modal" data-target="#uploadGroupLink">上傳小組連結</button>
+                                <table id="groupFileTable"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+        </div>
+        <!-- 新增個人檔案 -->
+        <div class="modal " id="uploadPersonalFile" tabindex="-1" role="dialog" aria-labelledby="uploadPersonalFile" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">上傳個人檔案</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label>檔案</label>
+                                <input type="file" class="form-control-file attachmentFile" multiple>
+                                <div class="fileList"></div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary uploadAttachmentButton" data-dismiss="modal">上傳</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 新增小組檔案 -->
+        <div class="modal" id="uploadGroupFile" tabindex="-1" role="dialog" aria-labelledby="uploadGroupFile" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">上傳小組檔案</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">                        
+                        <form>
+                            <div class="form-group">
+                                <label>檔案</label>
+                                <input type="file" class="form-control-file attachmentFile" multiple>
+                                <div class="fileList"></div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary uploadAttachmentButton" data-dismiss="modal">上傳</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 新增個人連結 -->
+        <div class="modal " id="uploadPersonalLink" tabindex="-1" role="dialog" aria-labelledby="uploadPersonalLink" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">上傳個人連結</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label>網站名稱</label>
+                                <input type="text" class="form-control linkName">
+                            </div>
+                            <div class="form-group">
+                                <label>網址</label>
+                                <input type="text" class="form-control link">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary uploadLinkButton" data-dismiss="modal">上傳</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 新增小組連結 -->
+        <div class="modal" id="uploadGroupLink" tabindex="-1" role="dialog" aria-labelledby="uploadGroupLink" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">上傳小組連結</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">                        
+                        <form>
+                            <div class="form-group">
+                                <label>網站名稱</label>
+                                <input type="text" class="form-control linkName">
+                            </div>
+                            <div class="form-group">
+                                <label>網址</label>
+                                <input type="text" class="form-control link">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary uploadLinkButton" data-dismiss="modal">上傳</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 刪除個人檔案 -->
+        <div class="modal" id="checkRemoveFile" tabindex="-1" role="dialog" aria-labelledby="checkRemoveFileLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">否</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal" id="checkRemoveFile_btn">是</button>
+                </div>
+              </div>
+            </div>
+        </div>
+        <!-- 分享檔案 -->
+        <div class="modal" id="checkShareFile" tabindex="-1" role="dialog" aria-labelledby="checkShareFileLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">否</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal" id="checkShareFile_btn">是</button>
+                </div>
+              </div>
+            </div>
+        </div>
+        <!-- 檢視檔案 -->
+        <div class="modal" id="viewAttachment" tabindex="-1" role="dialog" aria-labelledby="viewAttachment" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body"></div>
+                </div>
+            </div>
+        </div>
+        <!-- 檢視檔案標題 -->
+        <div class="modal" id="viewAttachmentFromNode" tabindex="-1" role="dialog" aria-labelledby="viewAttachmentFromNode" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body"></div>
+              </div>
+            </div>
+        </div>
+        <div id="activityId" style="display: none;"><%= activityId %></div>
+        <div id="groupId" style="display: none;"><%= groupId %></div>
+        <div id="memberId" style="display: none;"><%= memberId %></div>
+        <div id="memberName" style="display: none;"><%= memberName %></div>
+        <div id="groupSharedFileData" style="display: none;"><%= groupSharedFileData %></div>
+        <div id="personalFileData" style="display: none;"><%= personalFileData %></div>
+        <script src="/socket.io/socket.io.js"></script>
+        <script type="text/javascript" src="/javascripts/join_socket_room.js"></script>      
+        <script src="/javascripts/group_file_manager.js"></script>
+    </body>
+</html>

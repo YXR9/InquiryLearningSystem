@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>科學探究學習系統</title>
+        <%- include ../cdn.html %>        
+    </head>
+    <body>
+        <%- include ./group_navbar.html %>        
+        <!-- <div id="eventSpan"></div> -->
+        <!-- 活動面版 -->
+        <div id="mynetwork"></div>
+        <!-- 左側工具欄 -->
+        <div class="tools text-center">
+            <h5>新增</h5>   
+            <a href="#addIdea" class="tool" id="ideaTool" data-toggle="modal">
+                <img src="/images/icons/search.png" alt="探究主題">
+                <div class="tool-text">探究主題</div>
+            </a>   
+            <a href="#addScript" class="tool" id="ideaTool" data-toggle="modal">
+                <img src="/images/icons/pencil.png" alt="腳本撰寫">
+                <div class="tool-text">腳本撰寫</div>
+            </a>
+            <!-- <a href="#addDirectiveObservation" class="tool" id="directiveObservationTool" data-toggle="modal">
+                <img src="/images/icons/visibility.svg" alt="直接觀察">
+                <div class="tool-text">直接觀察</div>
+            </a> -->
+            <a href="#addOperationalObservation" class="tool" id="operationalObservationTool" data-toggle="modal">
+                <img src="/images/icons/operational-observation-black.svg" alt="操作觀察">
+                <div class="tool-text">操作觀察</div>
+            </a>
+            <a href="#addExperiment" class="tool" id="experimentTool" data-toggle="modal">
+                <img src="/images/icons/laboratory.svg" alt="實驗">
+                <div class="tool-text">實驗</div>
+            </a>
+            <!-- <a href="#addAttachment" class="tool" id="attachmentTool" data-toggle="modal">
+                <img src="/images/icons/attachment-black.svg" alt="檔案">
+                <div class="tool-text">檔案</div>
+            </a> -->
+        </div>
+        <!-- 新增工具之modals -->
+        <%- include ../modals/input.html %>
+        <!-- 檢視工具之modals -->
+        <%- include ../modals/view.html %>
+        <!-- 編輯工具之modals -->
+        <%- include ../modals/edit.html %>
+        <div id="nodeData" style="display: none;"><%= nodeData %></div>
+        <div id="edgeData" style="display: none;"><%= edgeData %></div>
+        <div id="activityId" style="display: none;"><%= activityId %></div>
+        <div id="groupId" style="display: none;"><%= groupId %></div>
+        <div id="memberId" style="display: none;"><%= memberId %></div>
+        <div id="memberName" style="display: none;"><%= memberName %></div> 
+        <div id="memberIdentity" style="display: none;"><%= memberIdentity %></div>       
+        <script rel="stylesheet" src="static/socket.io/socket.io.js"></script>
+        <script type="text/javascript" rel="stylesheet" src="static/public/javascripts/checkSession.js"></script>
+        <script type="text/javascript" rel="stylesheet" src="static/public/javascripts/receive_broadcast.js"></script>
+        <script type="text/javascript" rel="stylesheet" src="static/public/javascripts/join_socket_room.js"></script>
+        <script type="text/javascript" rel="stylesheet" src="static/public/javascripts/group.js"></script>
+    </body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>活動小組</title>
+        <%- include ./cdn.html %>        
+    </head>
+    <body>
+        <%- include ./navbar.html %>        
+        <!-- <div id="eventSpan"></div> -->
+        <!-- 活動面版 -->
+        <div id="mynetwork"></div>
+        <!-- 左側工具欄 -->
+        <div class="tools text-center">
+            <!-- <h5>新增</h5>    -->
+            <a href="#addKeyQuestion" class="tool" id="keyQuestionTool" data-toggle="modal">
+                <img src="/images/icons/key-question.svg" alt="關鍵提問">
+                <div class="tool-text">關鍵提問</div>
+            </a>         
+            <a href="#addIdea" class="tool" id="ideaTool" data-toggle="modal">
+                <img src="/images/icons/idea.svg" alt="想法">
+                <div class="tool-text">探究主題</div>
+            </a>         
+            <a href="#addIdea" class="tool" id="ideaTool" data-toggle="modal">
+                <img src="/images/icons/idea.svg" alt="想法">
+                <div class="tool-text">腳本撰寫</div>
+            </a>
+            <!-- <a href="#addDirectiveObservation" class="tool" id="directiveObservationTool" data-toggle="modal">
+                <img src="/images/icons/visibility.svg" alt="直接觀察">
+                <div class="tool-text">直接觀察</div>
+            </a> -->
+            <a href="#addOperationalObservation" class="tool" id="operationalObservationTool" data-toggle="modal">
+                <img src="/images/icons/operational-observation-black.svg" alt="操作觀察">
+                <div class="tool-text">操作觀察</div>
+            </a>
+            <a href="#addExperiment" class="tool" id="experimentTool" data-toggle="modal">
+                <img src="/images/icons/laboratory.svg" alt="實驗">
+                <div class="tool-text">實驗</div>
+            </a>
+            <a href="#addAttachment" class="tool" id="attachmentTool" data-toggle="modal">
+                <img src="/images/icons/attachment-black.svg" alt="檔案">
+                <div class="tool-text">檔案</div>
+            </a>
+        </div>
+        <div id="nodeData" style="display: none;"><%= nodeData %></div>
+        <div id="edgeData" style="display: none;"><%= edgeData %></div>
+        <div id="activityId" style="display: none;"><%= activityId %></div>
+        <div id="groupId" style="display: none;"><%= groupId %></div>
+        
+        <script type="text/javascript">
+            var nodes = new vis.DataSet();
+            var edges = new vis.DataSet();
+            var container = document.getElementById("mynetwork");
+            var networkData = {
+                nodes: nodes,
+                edges: edges
+            };
+            var options = {
+                nodes: {
+                    shapeProperties: {
+                        useBorderWithImage: false
+                    },
+                    size: 16
+                },
+                groups: {
+                    key_question: {
+                        color: { background: "rgb(255,255,255)", border: "rgba(0,0,0,0)" },
+                        shape: "image",
+                        image: "/images/icons/key-question-red.svg"
+                    },
+                    idea: {
+                        color: { background: "rgb(255,255,255)", border: "rgba(0,0,0,0)" },
+                        shape: "image",
+                        image: "/images/icons/idea-yellow.svg"
+                    },
+                    directive_observation: {
+                        color: { background: "rgb(255,255,255)", border: "rgba(0,0,0,0)" },
+                        shape: "image",
+                        image: "/images/icons/visibility-blue.svg"
+                    },
+                    operational_observation: {
+                        color: { background: "rgb(255,255,255)", border: "rgba(0,0,0,0)" },
+                        shape: "image",
+                        image: "/images/icons/operational-observation-blue.svg"
+                    },
+                    experiment: {
+                        color: { background: "rgb(255,255,255)", border: "rgba(0,0,0,0)" },
+                        shape: "image",
+                        image: "/images/icons/experiment-blue.svg"
+                    },
+                    experiment_record: {
+                        color: { background: "rgb(255,255,255)", border: "rgba(0,0,0,0)" },
+                        shape: "image",
+                        image: "/images/icons/experiment-record-blue.svg"
+                    },                   
+                    attachment: {
+                        color: { background: "rgb(255,255,255)", border: "rgba(0,0,0,0)" },
+                        shape: "image",
+                        image: "/images/icons/attachment-grey.svg"
+                    }
+                },
+                edges: {
+                    color: {color: "rgba(0,0,0,0.5)"},
+                    arrows: {           
+                        to: {
+                            enabled: true
+                        }          
+                    },
+                    smooth: {
+                        enabled: false
+                    }
+                },
+                interaction: {
+                    multiselect: true
+                },
+                physics: {
+                    enabled: false
+                }
+            }
+            function updateNodeData(data){
+                $.each(data, function(index, value){
+                    nodes.update({
+                        id: value.node_id,
+                        label: value.node_title,
+                        group: value.node_type,
+                        x: value.x,
+                        y: value.y
+                    });
+                }); 
+            }
+            function updateEdgeData(data){
+                $.each(data, function(index, value){
+                    edges.update({
+                        id: value.edge_id,
+                        from: value.edge_from,
+                        to: value.edge_to
+                    });
+                }); 
+            }
+            $(document).ready(function(){
+                var nodeData = JSON.parse($("#nodeData").text());
+                var edgeData = JSON.parse($("#edgeData").text());
+                var groupId = parseInt($("#groupID").text());
+                var activityId = parseInt($("#activityId").text());
+                console.log(nodeData);
+                console.log(edgeData);
+                updateNodeData(nodeData);
+                updateEdgeData(edgeData);
+                var network = new vis.Network(container, networkData, options);                                
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,291 @@
+<!-- 檢視關鍵提問 -->
+<div class="modal viewModal" id="viewKeyQuestion" tabindex="-1" role="dialog" aria-labelledby="viewKeyQuestion" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="nodeCountInfo text-right"></div>
+                <div class="nodeContent"></div>   
+                <div class="nodeAttachment"></div>         
+            </div>
+            <div class="modal-footer">
+                <span class="nodeInfo mr-auto"></span>   
+                <button type="button" class="btn btn-success editNode" data-dismiss="modal" data-toggle="modal" data-target="#editKeyQuestion">修改</button>             
+                <button type="button" class="btn btn-warning buildOnNode" data-dismiss="modal" data-toggle="modal" data-target="#addIdea">回覆</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 檢視想法 -->
+<div class="modal viewModal" id="viewIdea" tabindex="-1" role="dialog" aria-labelledby="viewIdea" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">                        
+                <div class="nodeCountInfo text-right"></div>
+                <div class="nodeContent"></div>
+                <div class="nodeAttachment"></div>
+            </div>
+            <div class="modal-footer">
+                <span class="nodeInfo mr-auto"></span>
+                <button type="button" class="btn btn-success editNode" data-dismiss="modal" data-toggle="modal" data-target="#editIdea">修改</button>
+                <button type="button" class="btn btn-addFavorite">收藏</button>
+                <button type="button" class="btn btn-removeFavorite">取消收藏</button>
+                <button type="button" class="btn btn-warning buildOnNode" data-dismiss="modal" data-toggle="modal" data-target="#addIdea">回覆</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 檢視直接觀察 -->
+<div class="modal viewModal viewPractice" id="viewDirectiveObservation" tabindex="-1" role="dialog" aria-labelledby="viewDirectiveObservation" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="nodeCountInfo text-right"></div>
+                <div class="nodeContent">
+                    <div class="row">
+                        <div class="col-4 practiceInfo"></div>
+                        <div class="col-8">  
+                            <table id="directiveObservationRecordTable"
+                                data-pagination="true"         
+                                data-page-size="10"
+                                data-page-list="[10, 25, 50, 100, 200, All]"
+                                data-toggle="table">
+                                <thead>
+                                    <tr>
+                                        <!-- <th data-field="id" data-sortable="true">#</th> -->
+                                        <th data-field="recordType" data-visible="false">類型</th>
+                                        <th data-field="recordId" data-visible="false">紀錄ID</th>
+                                        <th data-field="memberId" data-visible="false">作者ID</th>
+                                        <th data-field="recordAuthor" data-width="100" data-sortable="true">姓名</th>
+                                        <th data-field="record" data-width="600" data-sortable="true">觀察紀錄</th>
+                                        <th data-field="operate" data-width="60" data-events="operateEvents"></th>
+                                        <!-- <th data-field="directiveObservationRecordEdit"></th> -->
+                                    </tr>
+                                </thead>
+                            </table>
+                            <hr>
+                            <div class="form-group">
+                                <textarea class="form-control editor" name="newDirectiveObservationRecord" id="newDirectiveObservationRecord" placeholder="直接觀察紀錄"></textarea>
+                                <button class="btn btn-outline-info addRecord" id="addDirectiveObservationRecord_btn">新增紀錄</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                           
+            </div>
+            <div class="modal-footer">
+                <span class="nodeInfo mr-auto"></span>
+                <button type="button" class="btn btn-success editNode" data-dismiss="modal" data-toggle="modal" data-target="#editDirectiveObservation">修改</button>
+                <button type="button" class="btn btn-warning buildOnNode" data-dismiss="modal" data-toggle="modal" data-target="#addIdea">回覆</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 檢視操作觀察 -->
+<div class="modal viewModal viewPractice" id="viewOperationalObservation" tabindex="-1" role="dialog" aria-labelledby="viewOperationalObservation" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="nodeCountInfo text-right"></div>
+                <div class="nodeContent">
+                    <div class="row">
+                        <div class="col-4 practiceInfo"></div>
+                        <div class="col-8"> 
+                            <table id="operationalObservationRecordTable"
+                                data-pagination="true"         
+                                data-page-size="10"
+                                data-page-list="[10, 25, 50, 100, 200, All]"
+                                data-toggle="table">
+                                <thead>
+                                    <tr>
+                                        <th data-field="recordType" data-visible="false">類型</th>
+                                        <th data-field="recordId" data-visible="false">紀錄ID</th>
+                                        <th data-field="memberId" data-visible="false">作者ID</th>
+                                        <th data-field="recordAuthor"  data-width="100" data-sortable="true">姓名</th>
+                                        <th data-field="record"  data-width="600" data-sortable="true">觀察紀錄</th>
+                                        <th data-field="operate"  data-width="60" data-events="operateEvents"></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <hr>
+                            <div class="form-group">
+                                <textarea class="form-control editor" name="newOperationalObservationRecord" id="newOperationalObservationRecord" placeholder="直接觀察紀錄"></textarea>
+                                <button class="btn btn-outline-info addRecord" id="addOperationalObservationRecord_btn">新增紀錄</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span class="nodeInfo mr-auto"></span>                
+                <button type="button" class="btn btn-success editNode" data-dismiss="modal" data-toggle="modal" data-target="#editOperationalObservation">修改</button>
+                <button type="button" class="btn btn-warning buildOnNode" data-dismiss="modal" data-toggle="modal" data-target="#addIdea">回覆</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 檢視實驗 -->
+<div class="modal viewModal viewPractice practiceDesign" id="viewExperiment" aria-labelledby="viewExperiment" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="nodeCountInfo text-right"></div>
+                <div class="nodeContent">
+                    <div class="row">
+                        <div class="col-4 practiceInfo"></div>
+                        <div class="col-8">                        
+                            <form>
+                                <h4 style="display:inline"><span class="badge badge-info">實驗步驟</span></h4>
+                                <input style="display:inline;" type="button" class="btn btn-sm btn-outline-info float-right addStep" value="增加步驟" /><br><br>
+                                <table class="table table-hover stepTable">
+                                    <thead>
+                                        <tr>
+                                            <td >#</td>
+                                            <td>步驟說明</td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <hr>
+                                <h4><span class="badge badge-info">實驗材料/器材</span></h4>
+                                <div class="row newMaterial">
+                                    <div class="form-group col-6">
+                                        <label for="experimentMaterilName">材料/器材名稱</label>
+                                        <input type="text" class="form-control newMaterialName" name="experimentMaterilName" placeholder="名稱">
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label for="experimentMaterilNumber">材料/器材數量</label>
+                                        <input type="text" class="form-control newMaterialNumber" name="experimentMaterilNumber" placeholder="數量">
+                                    </div>
+                                    <div class="form-group col-2">
+                                        <label for="experimentMaterialAdd">&nbsp;</label>
+                                        <input type="button" class="btn btn-sm btn-outline-info addMaterial" value="增加材料/器材" />
+                                    </div>                        
+                                </div>
+                                <div class="row materials" id="experimentMaterils">
+                                </div>
+                                <hr>
+                                <button type="button" class="btn btn-primary btn-sm float-right" id="saveExperimentDesign">儲存實驗設計</button>
+                                <br><br><div class="lastEditor float-right align-bottom"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <span class="nodeInfo mr-auto"></span>                
+                <button type="button" class="btn btn-success editNode" data-dismiss="modal" data-toggle="modal" data-target="#editExperiment">修改</button>
+                <button type="button" class="btn btn-info" id="createExperimentRecordNode" data-dismiss="modal">建立實驗記錄</button>
+                <!-- <button type="button" class="btn btn-info" id="viewExperimentRecordNode" data-dismiss="modal" data-toggle="modal" data-target="#viewExperimentRecord">檢視實驗記錄</button> -->
+                <button type="button" class="btn btn-warning buildOnNode" data-dismiss="modal" data-toggle="modal" data-target="#addIdea">回覆</button>    
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 檢視實驗記錄 -->
+<div class="modal viewModal viewPractice" id="viewExperimentRecord" tabindex="-1" role="dialog" aria-labelledby="viewExperimentRecord" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="nodeCountInfo text-right"></div>
+                <div class="nodeContent">
+                    <div class="row">
+                        <div class="col-4 practiceInfo"></div>
+                        <div class="col-8">                        
+                            <table id="experimentRecordTable"
+                                data-pagination="true"         
+                                data-page-size="10"
+                                data-page-list="[10, 25, 50, 100, 200, All]"
+                                data-toggle="table">
+                                <thead>
+                                    <tr>
+                                        <th data-field="recordType" data-visible="false">類型</th>
+                                        <th data-field="recordId" data-visible="false">紀錄ID</th>
+                                        <th data-field="memberId" data-visible="false">作者ID</th>
+                                        <th data-field="recordAuthor"  data-width="100" data-sortable="true">姓名</th>
+                                        <th data-field="record"  data-width="600" data-sortable="true">觀察紀錄</th>
+                                        <th data-field="operate"  data-width="60" data-events="operateEvents"></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <hr>
+                            <div class="form-group">
+                                <textarea class="form-control editor" name="newExperimentRecord" id="newExperimentRecord" placeholder="實驗紀錄"></textarea>
+                                <button class="btn btn-outline-info addRecord" id="addExperimentRecord_btn">新增紀錄</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <span class="nodeInfo mr-auto"></span>                
+                <button type="button" class="btn btn-warning buildOnNode" data-dismiss="modal" data-toggle="modal" data-target="#addIdea">回覆</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 檢視檔案 -->
+<div class="modal viewModal viewAttachment" id="ViewAttachment" tabindex="-1" role="dialog" aria-labelledby="viewAttachment" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body"> 
+                <div class="nodeCountInfo text-right"></div>
+                <div class="nodeContent"></div>                       
+            </div>
+            <div class="modal-footer">
+                <span class="nodeInfo mr-auto"></span>             
+                <button type="button" class="btn btn-warning buildOnNode" data-dismiss="modal" data-toggle="modal" data-target="#addIdea">回覆</button>
+            </div>
+        </div>
+    </div>
+</div>

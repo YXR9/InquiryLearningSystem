@@ -1,0 +1,477 @@
+<!-- 新增活動 -->
+<div class="modal inputModal" id="addActivity" tabindex="-1" role="dialog" aria-labelledby="addActivity" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">新增活動</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="novalidate" id="addActivity_form" name="addActivity_form" action="/data_add/add_activity" method="POST">
+                    <div class="form-group">
+                        <label for="activityTitle">活動名稱</label>
+                        <input type="text" class="form-control" id="activityTitle" name="activityTitle" placeholder="活動標題" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="activityInfo">活動說明</label>
+                        <input type="text" class="form-control" id="activityInfo" name="activityInfo" placeholder="活動說明" required>
+                    </div>  
+                    <div class="form-group">
+                        <label for="activityGroupNumber">組別數量</label>
+                        <select class="form-control" id="activityGroupNumber">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary addNode" id="addActivity_btn" data-dismiss="modal">建立活動</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 新增組別 -->
+<div class="modal inputModal" id="addGroup" tabindex="-1" role="dialog" aria-labelledby="addGroup" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">新增組別</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="form-group">
+                        <label for="addGroupNumber">新增數量</label>
+                        <select class="form-control" id="addGroupNumber">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary addNode" id="addGroup_btn" data-dismiss="modal">新增組別</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 新增關鍵提問 -->
+<div class="modal inputModal" id="addKeyQuestion" tabindex="-1" role="dialog" aria-labelledby="addKeyQuestion" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">新增關鍵提問</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="form-group">
+                        <label for="keyQuestionTitle">標題</label>
+                        <input type="text" class="form-control keyQuestionTitle" name="keyQuestionTitle" placeholder="關鍵提問標題">
+                    </div>
+                    <div class="form-group">
+                        <label for="keyQuestionInfo">說明</label>
+                        <textarea class="form-control keyQuestionInfo editor" name="keyQuestionInfo" placeholder="關鍵提問說明"></textarea>
+                    </div>                    
+                    <div class="form-group">
+                        <input type="file" class="form-control-file uploadFile" id="keyQuestionFiles" multiple>
+                        <div class="fileList"></div>
+                    </div>
+                    <div class="selectGroup">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary addNode" id="addKeyQuestion_btn">新增</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 新增探究主題 -->
+<div class="modal inputModal" id="addIdea" tabindex="-1" role="dialog" aria-labelledby="addIdea" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">新增探究主題</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="form-group">
+                        <label for="ideaTitle">標題</label>
+                        <input type="text" class="form-control ideaTitle" name="ideaTitle" placeholder="探究主題標題">
+                    </div>
+                    <div class="row">
+                        <div class="col-3 scaffoldList d-flex justify-content-center align-items-start">
+                            <div class="btn-group-vertical"></div>
+                        </div>
+                        <div class="col-9">
+                            <div class="form-group" id="ideaContent_textarea">
+                                <textarea class="form-control ideaContent editor" name="ideaContent" placeholder="探究主題內容"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input type="file" class="form-control-file uploadFile" id="ideaFiles" multiple>
+                                <div class="fileList"></div>
+                            </div>
+                        </div>
+                    </div>   
+                    <div class="selectGroup">                 
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary addNode" id="addIdea_btn">新增</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 新增腳本撰寫 -->
+<div class="modal inputModal" id="addScript" tabindex="-1" role="dialog" aria-labelledby="addScript" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">新增腳本</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="form-group">
+                        <label for="ideaTitle">標題</label>
+                        <input type="text" class="form-control ideaTitle" name="ideaTitle" placeholder="腳本標題">
+                    </div>
+                    <div class="row">
+                        <div class="col-3 scaffoldList d-flex justify-content-center align-items-start">
+                            <div class="btn-group-vertical"></div>
+                        </div>
+                        <div class="col-9">
+                            <div class="form-group" id="ideaContent_textarea">
+                                <textarea class="form-control ideaContent editor" name="ideaContent" placeholder="腳本內容"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input type="file" class="form-control-file uploadFile" id="ideaFiles" multiple>
+                                <div class="fileList"></div>
+                            </div>
+                        </div>
+                    </div>   
+                    <div class="selectGroup">                 
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary addNode" id="addIdea_btn">新增</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 新增昇華的想法 -->
+<div class="modal inputModal" id="addRiseAbove" tabindex="-1" role="dialog" aria-labelledby="addRiseAbove" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">新增昇華的想法</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="form-group">
+                        <label for="riseAboveTitle">標題</label>
+                        <input type="text" class="form-control" id="riseAboveTitle" name="riseAboveTitle" placeholder="想法標題">
+                    </div>
+                    <div class="row">
+                        <div class="col-3 scaffoldList d-flex justify-content-center">
+                            <div class="btn-group-vertical"></div>
+                        </div>
+                        <div class="col-9">
+                            <div class="form-group" id="riseAboveContent_textarea">
+                                <textarea class="form-control editor" name="riseAboveContent" id="riseAboveContent" placeholder="想法內容"></textarea>
+                            </div>
+                        </div>
+                    </div>   
+                    <div class="selectGroup">                 
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary addNode" id="addRiseAbove_btn">新增</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 新增直接觀察(DO: Directive Observation) -->
+<div class="modal inputModal practiceModal" id="addDirectiveObservation" tabindex="-1" role="dialog" aria-labelledby="addDirectiveObservation" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">創立直接觀察任務</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="form-group">
+                        <label for="directiveObservationTitle">標題</label>
+                        <input type="text" class="form-control directiveObservationTitle" name="directiveObservationTitle" placeholder="直接觀察標題">
+                    </div>
+                    <div class="form-group">
+                        <label for="directiveObservationInfo">說明</label>
+                        <textarea class="form-control directiveObservationInfo editor" name="directiveObservationInfo" placeholder="直接觀察說明"></textarea>
+                    </div>
+                    <div class="selectGroup"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary addNode" id="addDirectiveObservation_btn">創立</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 新增操作觀察(OO: Operational Observation) -->
+<div class="modal inputModal practiceDesign practiceModal" id="addOperationalObservation" aria-labelledby="addOperationalObservation" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header"><!--上方標題 -->
+                <h5 class="modal-title">創立操作觀察任務</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body"><!-- 表單內容 -->
+                <div>
+                    <div class="form-group">
+                        <label for="operationalObservationTitle">標題</label>
+                        <input type="text" class="form-control operationalObservationTitle" name="operationalObservationTitle" placeholder="操作觀察標題">
+                    </div>
+                    <div class="form-group">
+                        <label for="operationalObservationInfo">說明</label>
+                        <textarea class="form-control operationalObservationInfo editor" name="operationalObservationInfo" placeholder="操作觀察說明"></textarea>
+                    </div>
+                    <hr>
+                    <h6 style="display:inline">實驗步驟</h6>
+                    <input style="display:inline; float:right;" type="button" class="btn btn-sm btn-outline-info addStep" value="增加步驟" />
+                    <table class="table table-hover stepTable">
+                        <thead>
+                            <tr>
+                                <td >#</td>
+                                <td>步驟說明</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <hr>
+                    <h6>實驗材料/器材</h6>
+                    <div class="row justify-content-between newMaterial">
+                        <div class="form-group col-6">
+                            <label for="operationalObservationMaterilName">材料/器材名稱</label>
+                            <input type="text" class="form-control newMaterialName" name="operationalObservationMaterilName" placeholder="名稱">
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="operationalObservationMaterilNumber">材料/器材數量</label>
+                            <input type="text" class="form-control newMaterialNumber" name="operationalObservationMaterilNumber" placeholder="數量">
+                        </div>
+                        <div class="form-group col-sm-2">
+                            <label for="operationalObservationMaterialAdd"></label>
+                            <input type="button" class="btn btn-sm btn-outline-info addMaterial" value="增加材料/器材" />
+                        </div>                        
+                    </div>
+                    <div class="row materials" id="operationalObservationMaterils">
+                    </div> 
+                    <div class="selectGroup"></div> 
+                </div>                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary addNode" id="addOperationalObservation_btn">創立</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 新增實驗 -->
+<div class="modal inputModal practiceModal" id="addExperiment" tabindex="-1" role="dialog" aria-labelledby="addExperiment" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">創立實驗任務</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="form-group">
+                        <label for="researchProblem">研究問題</label>
+                        <input type="text" class="form-control researchProblem" name="researchProblem" placeholder="研究問題">
+                    </div>
+                    <div class="form-group">
+                        <label for="researchHypothesis">研究假設</label>
+                        <input type="text" class="form-control researchHypothesis" name="researchHypothesis" placeholder="研究假設">
+                    </div>
+                    <div class="form-group">
+                        <label for="researchMotivation">研究動機</label>
+                        <textarea class="form-control researchMotivation editor" name="researchMotivation" placeholder="研究動機"></textarea>
+                    </div>
+                    <div class="selectGroup"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary addNode" id="addExperiment_btn">創立</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 新增檔案 -->
+<div class="modal inputModal" id="addAttachment" tabindex="-1" role="dialog" aria-labelledby="addAttachment" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">新增檔案</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="form-group">
+                        <label for="attachmentFile">檔案</label>
+                        <input type="file" class="form-control" id="attachmentFile">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary addNode" data-dismiss="modal" id="addAttachment_btn">新增</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 學生加入小組 -->
+<div class="modal inputModal" id="joinGroup" tabindex="-1" role="dialog" aria-labelledby="joinGroup" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">加入活動小組</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="form-group">
+                        <label for="joinGroupKey">活動小組代碼</label>
+                        <input type="text" class="form-control" id="joinGroupKey" name="joinGroupKey" placeholder="代碼">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="joinGroup_btn" data-dismiss="modal">加入</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 新增廣播訊息 -->
+<div class="modal inputModal" id="addBroadcastMessage" tabindex="-1" role="dialog" aria-labelledby="addBroadcastMessage" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">發布廣播訊息</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="form-group">
+                        <label for="broadcastMessage">訊息內容</label>
+                        <textarea name="broadcastMessage" class="form-control broadcastMessage" cols="30" rows="10" placeholder="要跟學生說..."></textarea>
+                    </div>
+                    <div class="selectGroup"></div> 
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="addBroadcastMessage_btn">發布</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 編輯探究紀錄 -->
+<div class="modal inputModal" id="editRecord" tabindex="10" role="dialog" aria-labelledby="editRecord" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">編輯紀錄</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="recordType" style="display: none;"></div>
+                    <div class="recordId" style="display: none;"></div>
+                    <div class="recordIndex" style="display: none;"></div>
+                    <div class="form-group">
+                        <textarea name="recordContent" class="form-control recordContent editor"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="editRecord_btn">儲存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 刪除紀錄-->
+<div class="modal" id="checkRemoveRecord" tabindex="-1" role="dialog" aria-labelledby="checkRemoveRecordLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+            <div class="recordType" style="display: none;"></div>
+            <div class="recordId" style="display: none;"></div>
+            <div class="recordIndex" style="display: none;"></div>
+            確定刪除紀錄？
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" id="checkRemoveRecord_btn">確定刪除</button>
+        </div>
+      </div>
+    </div>
+</div>

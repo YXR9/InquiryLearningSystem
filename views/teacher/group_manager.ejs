@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>科學探究學習系統</title>
+        <%- include ../cdn.html %>
+    </head>
+    <body>
+        <%- include ./activity_navbar.html %>
+        <div class="container-fluid" id="mainfuncNavBlank"></div>
+        <div class="container-fluid d-flex justify-content-center topImage" id="teacherGroupTopImage">
+            <button type="button" class="btn btn-light btn-lg align-self-center" data-toggle="modal" data-target="#addGroup">新增小組</button>
+        </div>
+        <div class="container">
+            <!-- <div class="row">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addGroup">新增小組</button>
+            </div> -->
+            <div class="row">
+                <table id="groupTable"
+                data-pagination="true"         
+                data-page-size="10"
+                data-page-list="[10, 25, 50, 100, 200, All]"
+                data-toggle="table">
+                    <thead>
+                        <tr>
+                            <th data-field="id" data-sortable="true">#</th>
+                            <th data-field="groupName"  data-width="400" data-sortable="true">小組名稱</th>
+                            <th data-field="groupMember" data-sortable="true">組員名單</th>
+                            <th data-field="groupKey" data-sortable="true">小組代碼</th>
+                            <th data-field="operate" data-formatter="groupTableFunction" data-events="operateEvents"></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div id="activityId" style="display: none;"><%= activityId %></div>
+        <!-- 新增工具之modals -->
+        <%- include ../modals/input.html %>
+        <script type="text/javascript">
+            var activityId;            
+            var groupTable_data = []
+            var $groupTable = $('#groupTable');
+            function groupTableFunction(value, row, index) {
+                return '<button class="btn btn-primary" id="viewGroup">參與活動</button>';
+            }
+            window.operateEvents = {                
+                'click #viewGroup': function (e, value, row, index){
+                    console.log("row.id: "+row.id);
+                    // var url="/teacher/activity?acitivity_id="+row.id;
+                    window.location.href="/group?activityId="+activityId+"&groupId="+row.id;
+                    window.event.returnValue=false;
+                }
+            }
+            function getGroup(){
+                console.log("activityId: "+activityId);
+                $.ajax({
+                    url: "/data_get/teacher_group",
+                    type: "GET",  
+                    data: {
+                        activityId: activityId
+                    },                
+                    success: function(data){
+                        groupTable_data.length = 0;
+                        $.each(data, function(index, value){
+                            groupTable_data.push({
+                                'id': value.group_id,
+                                'groupName': value.group_name,
+                                'groupMember': value.group_members,
+                                'groupKey': value.group_key
+                            });
+                        });
+                        $groupTable.bootstrapTable('load', groupTable_data);
+                    },
+                    error: function(){
+                        alert('/data_get/group 訪問失敗');
+                    }
+                });
+            }
+                       
+            $( document ).ready(function(){
+                activityId = parseInt($("#activityId").text());
+                $('.nav-link#goGroupManager').attr('href', '/teacher/group_manager?activityId='+activityId);
+                $('.nav-link#goBroadcast').attr('href', '/teacher/broadcast?activityId='+activityId);
+                $('#func-nav .navbar-nav .nav-item').removeClass('active');
+                $('#func-nav .navbar-nav .nav-item:eq(0)').addClass('active');
+                getGroup();
+                $("#addGroup_btn").on('click', function(event){
+                    console.log("有幾組? "+$('#groupTable').bootstrapTable('getData').length+"  新增幾組?"+$("#addGroupNumber option:selected").text());
+                    $.ajax({
+                        url: "/data_add/group",
+                        type: "POST",
+                        data: {
+                            groupNumber: $("#addGroupNumber option:selected").text(),
+                            currentGroupNumber: $('#groupTable').bootstrapTable('getData').length,
+                            activityId: activityId
+                        },
+                        success: function(data){
+                            getGroup();
+                        },
+                        error: function(){
+                            alert("Add Group Error");
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

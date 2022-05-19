@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>科學探究學習系統</title>
+        <%- include ../cdn.html %>
+    </head>
+    <body>
+        <%- include ./activity_navbar.html %>
+        <div class="container-fluid" id="mainfuncNavBlank"></div>        
+        <div class="container">
+            <div class="row">
+                <div class="btn-toolbar" role="toolbar">
+                    <button type="button" class="btn btn-outline-info mr-2" data-toggle="modal" data-target="#addBroadcastMessage">+ 訊息</button>
+                    <button type="button" class="btn btn-outline-danger mr-2" data-toggle="modal" data-target="#addKeyQuestion">+ 關鍵提問</button>
+                    <button type="button" class="btn btn-outline-warning mr-2" data-toggle="modal" data-target="#addIdea">+ 想法</button>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#addDirectiveObservation">+ 直接觀察</button>
+                        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#addOperationalObservation">+ 操作觀察</button>
+                        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#addExperiment">+ 實驗</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <table id="broadcastTable"></table>
+            </div>
+        </div>
+        <div id="activityId" style="display: none;"><%= activityId %></div>
+        <div id="memberId" style="display: none;">><%= memberId %></div>
+        <div id="groupData" style="display: none;"><%= groupData %></div>
+        <div id="broadcastData" style="display: none;"><%= broadcastData %></div>
+        <!-- 新增工具之modals -->
+        <%- include ../modals/input.html %>
+        <script src='/socket.io/socket.io.js'></script>
+        <script src="/javascripts/modal_content.js"></script>
+        <script src="/javascripts/experiment_design_operate.js"></script>
+        <script type="text/javascript">
+            let socket = io();
+            let $broadcastTable= $('#broadcastTable');
+            $broadcastTable.bootstrapTable({
+                columns: [
+                    {field: 'broadcast_message', sortable: true, title: '內容'},                    
+                    {field: 'broadcast_type', sortable: true, width: 100, title: '類型'},
+                    {field: 'group_name', sortable: true, width: 200, title: '小組'},
+                    {field: 'create_time', width: 200, title: '時間'}
+                ],
+                pagination: true,
+                pageSize: '10',
+                pageList: '[10, 20, 50]',
+                search: true
+            });
+            function getBroadcastByActivity(activityId){
+                $.ajax({
+                    url: '/teacher/get_broadcast_by_activity',
+                    type: 'GET',
+                    data: {
+                        activityId: activityId
+                    },
+                    success: function(broadcastData){
+                        console.log(broadcastData);
+                        $broadcastTable.bootstrapTable('load', broadcastData);
+                    },
+                    error: function(){
+                        alert('取得廣播資料失敗');
+                    }
+                })
+            }            
+            $(document).ready(function(){ 
+                let activityId = parseInt($("#activityId").text());
+                let memberId = parseInt($("#memberId").text());
+                let broadcastData= JSON.parse($('#broadcastData').text());
+                let groupData= JSON.parse($('#groupData').text());
+                let memberInfo={
+                    memberId: memberId,
+                    activityId: activityId
+                }
+                console.log(broadcastData);
+                console.log(groupData);
+                groupData.forEach(function(value, index){
+                    let memberInfo={
+                        memberId: memberId,
+                        activityId: activityId,
+                        groupId: value.group_id
+                    }
+                    socket.emit('join room', memberInfo);
+                });
+                $broadcastTable.bootstrapTable('load', broadcastData);
+                // 功能導覽列更新
+                $('.nav-link#goGroupManager').attr('href', '/teacher/group_manager?activityId='+activityId);
+                $('.nav-link#goBroadcast').attr('href', '/teacher/broadcast?activityId='+activityId);
+                $('#func-nav .navbar-nav .nav-item').removeClass('active');
+                $('#func-nav .navbar-nav .nav-item:eq(1)').addClass('active'); 
+                // 新增訊息廣播
+                $('#addBroadcastMessage_btn').on('click', function(){
+                    let $modal= $(this).closest('.modal');
+                    let broadcastMessage= $('.broadcastMessage').val().trim();
+                    let selectedGroupName= [], selectedGroupId= [];
+                    $modal.find('.selectGroup input[name="selectedGroup"]:checked').each(function(index, value){
+                        selectedGroupId.push(this.value);
+                        selectedGroupName.push($('label[for="'+this.id+'"').html());
+                    });
+                    let data= {
+                        activityId: activityId,
+                        broadcastMessage: broadcastMessage,
+                        selectedGroupId: selectedGroupId.toString(),
+                        selectedGroupName: selectedGroupName.toString()
+                    }
+                    console.log(data);
+                    $.ajax({
+                        url: '/teacher/add_group_broadcast_message',
+                        type: 'POST',
+                        data: {
+                            activityId: activityId,
+                            broadcastMessage: broadcastMessage,
+                            selectedGroupId: selectedGroupId.toString(),
+                            selectedGroupName: selectedGroupName.toString()
+                        },
+                        success: function(data){
+                            console.log(data);
+                            getBroadcastByActivity(activityId);
+                            groupData.forEach(function(group){
+                                socket.emit('broadcast message', {groupId: group.group_id, broadcastMessage: broadcastMessage});
+                            });
+                        },
+                        error: function(){
+                            alert('新增廣播訊息失敗');
+                        }
+                    })
+                });
+                // 新增關鍵提問廣播
+                $('#addKeyQuestion_btn').on('click', function(){
+                    let $modal= $(this).closest('.modal');
+                    let newText=$(this).closest('.modal-content').find('.editor');
+                    let newTextContent = newText.summernote('code').trim()?newText.summernote('code').trim():newText.val();
+                    let selectedGroup = $modal.find('.selectGroup input[name="selectedGroup"]:checked').map(function() {
+                        return this.value;
+                    }).get();
+                    alert(selectedGroup);
+                    let byteLength= countByteLength(newTextContent);
+                    // alert(byteLength +' '+ editorSizeLimit);
+                    if(byteLength > editorSizeLimit){
+                        alert('說明內容過多，請做刪減');
+                    }else{
+                        let formData=new FormData();
+                        formData.append('activityId', activityId);
+                        formData.append('nodeTitle', ($('.inputModal .keyQuestionTitle').val()));
+                        formData.append('keyQuestionInfo', newTextContent);
+                        formData.append('selectedGroup', selectedGroup.toString());
+                        let files= $('#keyQuestionFiles')[0].files;
+                        console.log(files.length);
+                        if(files.length> 0){
+                            for(let i=0;i<files.length;i++){
+                                formData.append('file', files[i]);
+                            }
+                        }
+                        $.ajax({
+                            url: '/teacher/add_group_keyquestion',
+                            type: 'POST',
+                            data: formData,
+                            enctype: "multipart/form-data",
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            success: function(data){
+                                console.log(data);
+                                if(data.existAttachment){
+                                    alert('小組中已有一樣的檔案，請重新命名檔案再上傳！');
+                                    $('#keyQuestionFiles').val('');
+                                    $('.fileList').html('');
+                                }else{
+                                    $('#addKeyQuestion').modal('hide');
+                                    // socket.emit('add node', {memberInfo: memberInfo, nodeData: data.nodeData});
+                                    getBroadcastByActivity(activityId);
+                                    $modal.modal('hide');
+                                    groupData.forEach(function(value){
+                                        let memberInfo={
+                                            memberId: memberId,
+                                            groupId: value.group_id
+                                        }
+                                        let groupNodeData = data.nodeData.filter(function (node) {
+                                            return node.group_id== value.group_id
+                                        });
+                                        socket.emit('broadcast message', {groupId: value.group_id, broadcastMessage: data.broadcastMessage})
+                                        socket.emit('add node', {memberInfo: memberInfo, nodeData: groupNodeData});
+                                    });
+                                }
+                            },
+                            error: function(){
+                                alert("新增關鍵提問失敗");
+                            }
+                        });
+                    }
+                });
+                // 新增想法廣播
+                $('#addIdea_btn').on('click', function(){
+                    let $modal= $(this).closest('.modal');
+                    let newText=$(this).closest('.modal-content').find('.editor');
+                    let newTextContent = newText.summernote('code').trim()?newText.summernote('code').trim():newText.val();
+                    let selectedGroup = $modal.find('.selectGroup input[name="selectedGroup"]:checked').map(function() {
+                        return this.value;
+                    }).get();
+                    let countScaffold= getCountScaffold(newTextContent);
+                    let byteLength= countByteLength(newTextContent);
+                    // alert(byteLength +' '+ editorSizeLimit);
+                    if(byteLength > editorSizeLimit){
+                        alert('說明內容過多，請做刪減');
+                    }else{
+                        let formData=new FormData();
+                        formData.append('activityId', activityId);
+                        formData.append('nodeTitle', $('.inputModal .ideaTitle').val());
+                        formData.append('ideaContent', newTextContent);
+                        formData.append('countScaffold', countScaffold);
+                        formData.append('selectedGroup', selectedGroup.toString());
+                        let files= $('#ideaFiles')[0].files;
+                        console.log(files.length);
+                        if(files.length> 0){
+                            for(let i=0;i<files.length;i++){
+                                formData.append('file', files[i]);
+                            }
+                        }
+                        $.ajax({
+                            url: '/teacher/add_group_idea',
+                            type: 'POST',
+                            data: formData,
+                            enctype: "multipart/form-data",
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            success: function(data){
+                                console.log(data);
+                                if(data.existAttachment){
+                                    alert('小組中已有一樣的檔案，請重新命名檔案再上傳！');
+                                    $('#ideaFiles').val('');
+                                    $('.fileList').html('');
+                                }else{
+                                    $('#addIdea').modal('hide');
+                                    getBroadcastByActivity(activityId);
+                                    $modal.modal('hide');
+                                    groupData.forEach(function(value){
+                                        let memberInfo={
+                                            memberId: memberId,
+                                            groupId: value.group_id
+                                        }
+                                        let groupNodeData = data.nodeData.filter(function (node) {
+                                            return node.group_id== value.group_id
+                                        });
+                                        socket.emit('broadcast message', {groupId: value.group_id, broadcastMessage: data.broadcastMessage})
+                                        socket.emit('add node', {memberInfo: memberInfo, nodeData: groupNodeData});
+                                    });
+                                }
+                            },
+                            error: function(){
+                                alert("新想法失敗");
+                            }
+                        });
+                    }                
+                });
+                // 新增直接觀察廣播
+                $('#addDirectiveObservation_btn').on('click', function(){
+                    let $modal= $(this).closest('.modal');
+                    let newText=$(this).closest('.modal-content').find('.editor');
+                    let newTextContent = newText.summernote('code').trim()?newText.summernote('code').trim():newText.val();
+                    let selectedGroup = $modal.find('.selectGroup input[name="selectedGroup"]:checked').map(function() {
+                        return this.value;
+                    }).get();
+                    // alert(selectedGroup);
+                    let byteLength= countByteLength(newTextContent);
+                    // alert(byteLength +' '+ editorSizeLimit);
+                    if(byteLength > editorSizeLimit){
+                        alert('說明內容過多，請做刪減');
+                    }else{
+                        $.ajax({
+                            url: '/teacher/add_group_directive_observation',
+                            type: 'POST',
+                            data: {
+                                activityId: activityId,
+                                nodeTitle: $('.inputModal .directiveObservationTitle').val().trim(),
+                                directiveObservationInfo: newTextContent,
+                                selectedGroup: selectedGroup.toString()
+                            },
+                            success: function(data){
+                                console.log(data);
+                                $modal.modal('hide');
+                                getBroadcastByActivity(activityId);
+                                $modal.modal('hide');
+                                groupData.forEach(function(value){
+                                    let memberInfo={
+                                        memberId: memberId,
+                                        groupId: value.group_id
+                                    }
+                                    let groupNodeData = data.nodeData.filter(function (node) {
+                                        return node.group_id== value.group_id
+                                    });
+                                    socket.emit('broadcast message', {groupId: value.group_id, broadcastMessage: data.broadcastMessage})
+                                    socket.emit('add node', {memberInfo: memberInfo, nodeData: groupNodeData});
+                                });
+                                
+                            },
+                            error: function(){
+                                alert("新增直接觀察失敗");
+                            }
+                        });
+                    }
+                });
+                //新增操作觀察廣播
+                $("#addOperationalObservation_btn").on('click', function(){
+                    let $modal= $(this).closest('.inputModal');
+                    let nodeTitle= $('.inputModal .operationalObservationTitle').val().trim();
+                    let newText=$(this).closest('.modal-content').find('.editor');
+                    let newTextContent = newText.summernote('code').trim()?newText.summernote('code').trim():newText.val();
+                    let steps=$(this).closest(".modal-content").find("input.step").map(function(){
+                        return $(this).val();
+                    }).get();
+                    let materials=$(this).closest(".modal-content").find(".materials .card").map(function(){
+                        let newMatarial=new Object;
+                        newMatarial['name']=($(this).find('.materialName').text()).slice(0,-1);
+                        newMatarial['number']=$(this).find('.materialNumber').text();
+                        return newMatarial;
+                    }).get();
+                    if(nodeTitle.length <= 0){
+                        alert('請輸入操作觀察標題！');
+                    }else{
+                        if(steps.length < 1){
+                            alert('至少要有一個實驗步驟！');
+                        }else{
+                            if(steps[0].trim().length < 1){
+                                alert('步驟1的內容不能空白！');
+                            }else{
+                                let selectedGroup = $modal.find('.selectGroup input[name="selectedGroup"]:checked').map(function() {
+                                    return this.value;
+                                }).get();
+                                let byteLength= countByteLength(newTextContent);
+                                if(byteLength > editorSizeLimit){
+                                    alert('說明內容過多，請做刪減');
+                                }else{
+                                    $.ajax({
+                                        url: '/teacher/add_group_operational_observation',
+                                        type: 'POST',
+                                        data: {                                            
+                                            activityId: activityId,
+                                            nodeTitle: $('.inputModal .operationalObservationTitle').val().trim(),
+                                            operationalObservationInfo: newTextContent,
+                                            steps: steps.toString(),
+                                            materials: JSON.stringify(materials),
+                                            selectedGroup: selectedGroup.toString()
+                                        },
+                                        success: function(data){
+                                            console.log(data);
+                                            $modal.modal('hide');
+                                            getBroadcastByActivity(activityId);
+                                            $modal.modal('hide');
+                                            groupData.forEach(function(value){
+                                                let memberInfo={
+                                                    memberId: memberId,
+                                                    groupId: value.group_id
+                                                }
+                                                let groupNodeData = data.nodeData.filter(function (node) {
+                                                    return node.group_id== value.group_id
+                                                });
+                                                socket.emit('broadcast message', {groupId: value.group_id, broadcastMessage: data.broadcastMessage})
+                                                socket.emit('add node', {memberInfo: memberInfo, nodeData: groupNodeData});
+                                            });
+                                            
+                                        },
+                                        error: function(){
+                                            alert("新增操作觀察失敗");
+                                        }
+                                    });
+                                }
+                                // let byteLength= countByteLength(newTextContent);
+                                // // alert(byteLength +' '+ editorSizeLimit);
+                                // if(byteLength > editorSizeLimit){
+                                //     alert('說明內容過多，請做刪減');
+                                // }else{
+                                //     let formData={
+                                //         nodeTitle: nodeTitle,
+                                //         operationalObservationInfo: newTextContent,
+                                //         steps: steps.toString(),
+                                //         materials: JSON.stringify(materials),
+                                //         fromNodeId: currentNodeId
+                                //     }
+                                //     socket.emit('add operationalObservation', {memberInfo: memberInfo, formData: formData});
+                                //     $modal.modal('hide');
+
+                                // }
+                                
+                            }               
+                        }
+                    }
+                });
+                // 新增實驗廣播
+                $('#addExperiment_btn').on('click', function(){
+                    let $modal= $(this).closest('.modal');
+                    let newText=$(this).closest('.modal-content').find('.editor');
+                    let newTextContent = newText.summernote('code').trim()?newText.summernote('code').trim():newText.val();
+                    let selectedGroup = $modal.find('.selectGroup input[name="selectedGroup"]:checked').map(function() {
+                        return this.value;
+                    }).get();
+                    // alert(selectedGroup);
+                    let byteLength= countByteLength(newTextContent);
+                    // alert(byteLength +' '+ editorSizeLimit);
+                    if(byteLength > editorSizeLimit){
+                        alert('說明內容過多，請做刪減');
+                    }else{
+                        $.ajax({
+                            url: '/teacher/add_group_experiment',
+                            type: 'POST',
+                            data: {
+                                activityId: activityId,
+                                nodeTitle: $('.inputModal .researchProblem').val().trim(),
+                                researchHypothesis: $('.inputModal .researchHypothesis').val().trim(),
+                                researchMotivation: newTextContent,
+                                selectedGroup: selectedGroup.toString()
+                            },
+                            success: function(data){
+                                console.log(data);
+                                $modal.modal('hide');
+                                getBroadcastByActivity(activityId);
+                                $modal.modal('hide');
+                                groupData.forEach(function(value){
+                                    let memberInfo={
+                                        memberId: memberId,
+                                        groupId: value.group_id
+                                    }
+                                    let groupNodeData = data.nodeData.filter(function (node) {
+                                        return node.group_id== value.group_id
+                                    });
+                                    socket.emit('broadcast message', {groupId: value.group_id, broadcastMessage: data.broadcastMessage})
+                                    socket.emit('add node', {memberInfo: memberInfo, nodeData: groupNodeData});
+                                });
+                                
+                            },
+                            error: function(){
+                                alert("新增直接觀察失敗");
+                            }
+                        });
+                    }
+                });
+                //打開新增廣播的modal表單時，顯示小組checkbox
+                $('.inputModal').on('show.bs.modal', function(e){
+                    $(this).find('.selectGroup').html('<hr><h6>選擇廣播小組</h6>');
+                    groupData.forEach(element => {
+                        let msg= '<div class="custom-control custom-checkbox pr-4" title="'+element.group_members+'" style="display: inline;">'
+                                +'<input class="custom-control-input" type="checkbox" name="selectedGroup" id="group'+element.group_id+'" value="'+element.group_id+'" checked>'
+                                +'<label class="custom-control-label" for="group'+element.group_id+'">'+element.group_name+'</label>'
+                                +'</div>';
+                        $(this).find('.selectGroup').append(msg);                        
+                    });
+                });
+                //關閉廣播的modal表單時，清空表單內容
+                $('.modal').on('hidden.bs.modal', function (e) {
+                    $(this).find("input:not(.btn),textarea,select")
+                    .val('')
+                    .end()
+                    .find("input[type=checkbox], input[type=radio]")
+                    .prop("checked", "")
+                    .end()
+                    .find('.build-on').remove().end();
+                    $(this).find('.selectGroup').html('');
+                    $(this).find('.editor').summernote('code', '');
+                    $(this).find('.modal-body .practiceInfo').html('');
+                    $(this).find('#ideaFiles').val('');
+                    $(this).find('.modal-body .fileList').html('');
+                    if($(this).find('video').length >0)
+                        $(this).find('video')[0].pause();//關掉modal時，將影片暫停
+                });
+                //初始化部分textarea為summernote
+                $('.editor').summernote({
+                    dialogsInBody: true,
+                    height: 200,
+                    toolbar: [
+                        ['style', ['bold', 'italic', 'underline', 'clear']],
+                        ['font', ['strikethrough', 'superscript', 'subscript']],
+                        ['fontname', ['fontname']],
+                        ['fontsize', ['fontsize']],
+                        ['color', ['color']],
+                        ['para', ['ul', 'ol', 'paragraph']],
+                        ['insert', ['table', 'link', 'video']]
+                    ]
+                });
+            });
+        </script>
+    </body>
+</html>
