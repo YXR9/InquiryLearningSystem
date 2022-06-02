@@ -10,6 +10,7 @@ function getGroupData(group_id){
         pool.query(sql, group_id, function(err, results){
             if(err) throw err;
             resolve(results[0]);
+            console.log("Hi~success!")
         });
     });
 }

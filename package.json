@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
+    "cors": "^2.8.5",
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
     "express": "~4.16.0",
@@ -19,6 +20,7 @@
     "multer": "^1.4.2",
     "mysql": "^2.18.1",
     "socket.io": "^2.4.1",
-    "vis-network": "^7.3.4"
+    "vis": "^4.21.0-EOL",
+    "vis-network": "^7.10.2"
   }
 }

@@ -13,17 +13,17 @@
                     <div id="practiceList">
                         <button class="practiceType"
                         data-toggle="collapse" data-target="#directiveObservationList">
-                        <img src="/images/icons/visibility-white.svg" alt="直接觀察"> 直接觀察任務
+                        <img src="/public/images/icons/visibility-white.svg" alt="直接觀察"> 直接觀察任務
                         <i class="fa fa-chevron-down float-right chevron"></i></button>
                         <div class="collapse show" id="directiveObservationList"></div>                    
                         <button class="practiceType"
                             data-toggle="collapse" data-target="#operationalObservationList">
-                            <img src="/images/icons/operational-observation-white.svg" alt="操作觀察"> 操作觀察任務
+                            <img src="/public/images/icons/operational-observation-white.svg" alt="操作觀察"> 操作觀察任務
                         </button>
                         <div class="collapse show" id="operationalObservationList"></div>
                         <button class="practiceType"
                             data-toggle="collapse" data-target="#experimentList">
-                            <img src="/images/icons/experiment-white.svg" alt="實驗"> 實驗任務
+                            <img src="/public/images/icons/experiment-white.svg" alt="實驗"> 實驗任務
                         </button>
                         <div class="collapse show" id="experimentList"></div>
                     </div>
@@ -39,7 +39,7 @@
                         <div class="card" id="directiveObservationList">
                             <p class="card-header practiceType">
                                 <a class="d-block practiceTypeBtn" data-toggle="collapse" href="#directiveObservationMission" aria-expanded="true" aria-controls="directiveObservationMission">
-                                    <img class="pr-2" src="/images/icons/visibility-white.svg" alt="直接觀察">直接觀察任務<i class="fa fa-chevron-down float-right chevron"></i>
+                                    <img class="pr-2" src="/public/images/icons/visibility-white.svg" alt="直接觀察">直接觀察任務<i class="fa fa-chevron-down float-right chevron"></i>
                                 </a>
                             </p>
                             <div id="directiveObservationMission" class="collapse show"></div>
@@ -47,7 +47,7 @@
                         <div class="card" id="operationalObservationList">
                             <p class="card-header practiceType">
                                 <a class="d-block practiceTypeBtn" data-toggle="collapse" href="#operationalObservationMission" aria-expanded="true" aria-controls="operationalObservationMission">
-                                    <img class="pr-2" src="/images/icons/operational-observation-white.svg" alt="操作觀察">操作觀察任務<i class="fa fa-chevron-down float-right chevron"></i>
+                                    <img class="pr-2" src="/public/images/icons/operational-observation-white.svg" alt="操作觀察">操作觀察任務<i class="fa fa-chevron-down float-right chevron"></i>
                                 </a>
                             </p>
                             <div id="operationalObservationMission" class="collapse show"></div>
@@ -55,7 +55,7 @@
                         <div class="card" id="experimentList">
                             <p class="card-header practiceType">
                                 <a class="d-block practiceTypeBtn" data-toggle="collapse" href="#experimentMission" aria-expanded="true" aria-controls="experimentMission">
-                                    <img class="pr-2" src="/images/icons/experiment-white.svg" alt="實驗">實驗任務<i class="fa fa-chevron-down float-right chevron"></i>
+                                    <img class="pr-2" src="/public/images/icons/experiment-white.svg" alt="實驗">實驗任務<i class="fa fa-chevron-down float-right chevron"></i>
                                 </a>
                             </p>
                             <div id="experimentMission" class="collapse show"></div>
@@ -85,7 +85,7 @@
         <div id="directiveObservationData" style="display: none;"><%= directiveObservationData %></div>
         <div id="operationalObservationData" style="display: none;"><%= operationalObservationData %></div>
         <div id="experimentData" style="display: none;"><%= experimentData %></div>
-        <script src="/socket.io/socket.io.js"></script>
+        <script src="http://localhost:8000/socket.io/socket.io.js"></script>
         <script type="text/javascript" src="/javascripts/checkSession.js"></script>
         <script type="text/javascript" src="/javascripts/receive_broadcast.js"></script>
         <script type="text/javascript" src="/javascripts/join_socket_room.js"></script>

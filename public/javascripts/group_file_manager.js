@@ -18,11 +18,11 @@ function groupOperateFormatter(value, row, index){
 }
 function viewNodeFormatter(value, row, index){
     if(row.node_type=='idea')
-        return '<a class="viewNode" href="javascript:void(0)" title="檢視想法標題"><img height="20rem" src="/images/icons/idea-selected.svg" alt="想法"></a>';
+        return '<a class="viewNode" href="javascript:void(0)" title="檢視想法標題"><img height="20rem" src="/public/images/icons/idea-selected.svg" alt="想法"></a>';
     else if(row.node_type=='attachment')
-        return '<a class="viewNode" href="javascript:void(0)" title="檢視檔案標題"><img height="16rem" src="/images/icons/attachment.svg" alt="檔案"></a>';
+        return '<a class="viewNode" href="javascript:void(0)" title="檢視檔案標題"><img height="16rem" src="/public/images/icons/attachment.svg" alt="檔案"></a>';
     else if(row.node_type=='directive_observation')
-        return '<a class="viewNode" href="javascript:void(0)" title="檢視直接觀察標題"><img height="16rem" src="/images/icons/visibility-blue.svg" alt="直接觀察"></a>';
+        return '<a class="viewNode" href="javascript:void(0)" title="檢視直接觀察標題"><img height="16rem" src="/public/images/icons/visibility-blue.svg" alt="直接觀察"></a>';
 }
 function attachmentNameFormatter(value, row, index){
     if(row.attachment_type=="連結"){
