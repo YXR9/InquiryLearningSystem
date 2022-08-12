@@ -14,7 +14,7 @@ function newNode(type, memberId, memberName, nodeTitle, groupId){
         pool.query(sql, sqlValue, function(err, results){
             if(err) throw err;
             var newNodeId = results.insertId;
-            let sql2='INSERT INTO `node_read_count` SET group_id=?, node_id=?, read_node_member_list="-1"'
+            let sql2='INSERT INTO `node_read_count` SET group_id= ?, node_id= ?, read_node_member_list="-1"'
             pool.query(sql2, [groupId, newNodeId], function(err, results){
                 if(err) throw err;
                 resolve(newNodeId);
@@ -1262,7 +1262,7 @@ module.exports = {
     },
     getBroadcastByGroup: function(groupId){
         return new Promise(function(resolve){
-            let sql= 'SELECT *, DATE_FORMAT(broadcast_time, "%Y-%m-%d %T") AS time  FROM `broadcast` WHERE broadcast_group_id=? ORDER BY broadcast_time DESC LIMIT 5';
+            let sql= 'SELECT *, DATE_FORMAT(broadcast_time, "%Y-%m-%d %T") AS time  FROM `broadcast` WHERE broadcast_group_id= ? ORDER BY broadcast_time DESC LIMIT 5';
             pool.query(sql, groupId, function(err, results){
                 if(err) throw err;
                 console.log(results);

@@ -11,7 +11,7 @@ body {
   width: 100%;
   height: 100vh;
   /* background-color: #222; */
-  background-image: url("/public/images/background/p_pt_0111_ll_pt_01112.jpg");
+  background-image: url("/images/background/p_pt_0111_ll_pt_01112.jpg");
   background-repeat: repeat;
   /* filter: brightness(50%); */
 }
@@ -92,20 +92,20 @@ body {
   height: 10vh;
 }
 .topImage{    
-  /* background-image: url("/public/images/background/3239.jpg"); */
+  /* background-image: url("/images/background/3239.jpg"); */
   background-size: cover;
   min-height: 50vh;
   background-position: center;
   /* filter: grayscale(80%); */
 }
 .topImage#teacherActivityTopImage{    
-  background-image: url("/public/images/background/496.jpg");
+  background-image: url("/images/background/496.jpg");
 }
 .topImage#teacherGroupTopImage{    
-  background-image: url("/public/images/background/905.jpg");
+  background-image: url("/images/background/905.jpg");
 }
 .topImage#studentTopImage{    
-  background-image: url("/public/images/background/3239.jpg");
+  background-image: url("/images/background/3239.jpg");
 }
 
 #mynetwork{

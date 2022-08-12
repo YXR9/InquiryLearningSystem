@@ -5,7 +5,7 @@
     <script src="https://kit.fontawesome.com/b9afe6cc19.js" crossorigin="anonymous"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel='stylesheet' href='/public/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
@@ -13,7 +13,7 @@
   <body>
     <!-- 最上方導覽列 -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-expand fixed-top" id="index-nav">
-        <a href="#" class="navbar-brand"><i class="fas fa-home"></i>  科學探究學習系統</a>        
+        <a href="#" class="navbar-brand"><i class="fas fa-home"></i>科學探究學習系統</a>        
     </nav>
     <div class="container-fluid" id="index-container">
       <div class="row justify-content-between align-items-center">
@@ -167,9 +167,11 @@
               console.log(data.registIdentity);
               if(success){
                 if(data.registIdentity=='老師'){
+                  console.log("註冊的人是老師~")
                   window.location.href="/teacher";
                   return false;
                 }else{
+                  console.log("註冊的人是學生~")
                   window.location.href="/student";
                   return false;
                 }
@@ -204,20 +206,22 @@
             data: data,
             success: function(results){
               if(results.alreadyLogin){
-                alert('你已經登入囉！')
-                window.location.href="/";
-              }else{
-                let success= results.success;
-                console.log(data.loginIdentity);
+                  alert('你已經登入囉！');
+                  window.location.href = "/";
+              } else{
+                let success = results.success;
+                console.log("data: ", data.loginIdentity);
                 if(success){
-                  if(data.loginIdentity=='老師'){
-                    window.location.href="/teacher";
+                  if(data.loginIdentity == '老師'){
+                    window.location.href = "/teacher";
+                    console.log("是老師登入的！");
                     return false;
                   }else{
-                    window.location.href="/student";
+                    window.location.href = "/student";
+                    console.log("是學生登入的！");
                     return false;
                   }
-                }else{
+                } else{
                   alert('帳號或密碼錯誤，請重新登入');
                   $('#loginAccount').val('');
                   $('#loginPassword').val('');

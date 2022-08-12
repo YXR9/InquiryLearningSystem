@@ -5,7 +5,7 @@ $(document).ready(function(){
             url: '/check_session',
             type: 'GET',
             success: function(session){
-                console.log('session: '+session);
+                console.log('session: ' + session);
                 if(!session){
                     window.location.href="/";
                 }
