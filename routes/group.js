@@ -428,9 +428,9 @@ router.get('/learning_process', function(req, res, next){
                                     }
                                     // console.log(renderData);
                                     if(req.session.memberIdentity=='老師'){
-                                        res.render('teacher/learning_process',renderData);   
+                                        res.render('teacher/learning_process', renderData);   
                                     }else{
-                                        res.render('student/learning_process',renderData);
+                                        res.render('student/learning_process', renderData);
                                     }
                                 });                                
                             });                            

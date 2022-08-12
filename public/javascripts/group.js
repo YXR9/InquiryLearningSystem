@@ -48,42 +48,42 @@ var options = {
         key_question: {
             color: { background: "rgb(255,255,255)", border: "rgba(0,0,0,0)" },
             shape: "image",
-            image: "/public/images/icons/key-question-red.svg"
+            image: "/images/icons/key-question-red.svg"
         },
         idea: {
             color: { background: "rgb(255,255,255)", border: "rgba(0,0,0,0)" },
             shape: "image",
-            image: "/public/images/icons/idea-yellow.svg"
+            image: "/images/icons/idea-yellow.svg"
         },
         rise_above: {
             color: { background: "rgb(255,255,255)", border: "rgba(0,0,0,0)" },
             shape: "image",
-            image: "/public/images/icons/rise-above2.svg"
+            image: "/images/icons/rise-above2.svg"
         },
         directive_observation: {
             color: { background: "rgb(255,255,255)", border: "rgba(0,0,0,0)" },
             shape: "image",
-            image: "/public/images/icons/visibility-blue.svg"
+            image: "/images/icons/visibility-blue.svg"
         },
         operational_observation: {
             color: { background: "rgb(255,255,255)", border: "rgba(0,0,0,0)" },
             shape: "image",
-            image: "/public/images/icons/operational-observation-blue.svg"
+            image: "/images/icons/operational-observation-blue.svg"
         },
         experiment: {
             color: { background: "rgb(255,255,255)", border: "rgba(0,0,0,0)" },
             shape: "image",
-            image: "/public/images/icons/experiment-blue.svg"
+            image: "/images/icons/experiment-blue.svg"
         },
         experiment_record: {
             color: { background: "rgb(255,255,255)", border: "rgba(0,0,0,0)" },
             shape: "image",
-            image: "/public/images/icons/experiment-record-blue.svg"
+            image: "/images/icons/experiment-record-blue.svg"
         },                   
         attachment: {
             color: { background: "rgb(255,255,255)", border: "rgba(0,0,0,0)" },
             shape: "image",
-            image: "/public/images/icons/attachment-grey.svg"
+            image: "/images/icons/attachment-grey.svg"
         }
     },
     edges: {

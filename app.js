@@ -6,13 +6,8 @@ var logger = require('morgan');
 var session = require('express-session');
 var groupData = require('./models/group_data');
 var activityData = require('./models/activity_data');
-var cors = require('cors');
 
 var app = express();
-app.use(cors({
-  origin: '*'
-}))
-
 var server = require('http').Server(app);
 server.listen(8000, function () {
   console.log('server listening on port 8000');
@@ -235,20 +230,17 @@ io.on('connection', function(socket){
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// app.use("/static", express.static('static'));
+app.use("/static", express.static('public'));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use("/public", express.static(path.join(__dirname + '/public')));
-console.log(path.join(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   secret: 'secret',
   resave: true,
-  saveUninitialized: true,//強制將未初始化的session存回 session store，未初始化的意思是它是新的而且未被修改。(預設：true)
+  saveUninitialized: true,  //強制將未初始化的session存回 session store，未初始化的意思是它是新的而且未被修改。(預設：true)
   cookie: {
-    secure: true,
-    sameSite: "none",
     maxAge: 1000*60*60*8,
   }
 }));

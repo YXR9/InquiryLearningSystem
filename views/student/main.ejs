@@ -59,9 +59,9 @@
             }
             window.operateEvents = {                
                 'click #viewGroup': function (e, value, row, index){
-                    console.log("row.activityId: "+row.activityId+"  row.groupId: "+row.groupId);
+                    console.log("row.activityId: " + row.activityId + "  row.groupId: " + row.groupId);
                     // var url="/teacher/activity?acitivity_id="+row.id;
-                    window.location.href="/group?activityId="+row.activityId+"&groupId="+row.groupId;
+                    window.location.href = "/group?activityId=" + row.activityId + "&groupId="+row.groupId;
                     window.event.returnValue=false;
                 }
             }
