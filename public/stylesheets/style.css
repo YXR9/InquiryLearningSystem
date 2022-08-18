@@ -3,6 +3,8 @@ body {
   /* padding-top: 70px; 在nav下方 */
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   font-family: Microsoft JhengHei;
+  background: #fff;
+  /* background-color: #000; */
 }
 .row{
   padding-bottom: 16px;
@@ -10,25 +12,75 @@ body {
 #index-container{
   width: 100%;
   height: 100vh;
-  /* background-color: #222; */
-  background-image: url("/images/background/p_pt_0111_ll_pt_01112.jpg");
-  background-repeat: repeat;
+  float: left;
+  /* clip-path: polygon(0 0, 50% 0, 50% 100%, 0% 100%); */
+  background-image: url("/images/background/—Pngtree—purple book education hand drawn_1177994.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
   /* filter: brightness(50%); */
 }
+
 #index-container .row{
   height: 100%;
 }
+
 #index-nav{
   background-color: #215D71;
 }
+
+a.welcome {
+  line-height: 50px;
+  font-size: 2rem;
+  color: #215D71;
+  font-weight: bolder;
+}
+
+a.detail{
+  line-height: 30px;
+  font-size: 1rem;
+  color: rgb(153, 153, 153);
+}
+
 .login-card{
-  width: 50vw;
+  width: 35vw;
   z-index: 2;
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 75%;
   transform: translate(-50%, -50%);
+  border: #fff;
+  border-radius: 30px;
+  box-shadow: 5px 8px 2px rgba(0, 0, 0, 0.3);
+  padding: 15px;
 }
+
+.nav-item{
+  color: #555;
+  margin-top: 25px;
+}
+
+.nav-item:hover{
+  color: rgb(180, 180, 180);
+}
+
+.nav-item:focus{
+  color: #555;
+}
+
+.form-group{
+  color: #555;
+}
+
+.text-muted{
+  color: #555!important;
+}
+
+.custom-control-label{
+  color: #555;
+}
+
 .container{
   margin-top: 1vh;
 }
@@ -36,76 +88,118 @@ body {
   width: 100%;
 }
 .navbar#main-nav .navbar-brand{
-  font-size: 1rem;
+  font-size: 1.5rem;
+  color: #000;
+  font-weight: bolder;
   border-radius: 10%;
   padding-right: 0.5rem;
   padding-left: 0.5rem;
-  margin: 0px;
   cursor: pointer;
 }
+
+.navbar-dark .navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bolder;
+  line-height: 3rem;
+  margin-left: 1rem;
+  color: #000;
+}
+
+.navbar-dark .navbar-brand:hover {
+  color: #408aa3;
+}
+
 .navbar#main-nav .navbar-brand{
   outline: none !important;
 }
+
 .navbar#main-nav .navbar-brand:hover{
-  background-color: rgb(26, 73, 88);
+  background-color: #fff;
+  color: #408aa3;
 }
+
+.navbar-label{
+  font-size: 1.5rem;
+  border-radius: 10%;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  display: flex;
+  align-items: center;
+  margin: 0px;
+  cursor: pointer;
+  color: #000;
+}
+
 .navbar#func-nav{
   /* font-size: 16px; */
   top: 6vh;
   height: 4vh;
   padding: 0px;
 }
+
 .navbar#func-nav .navbar-nav{
   height: 4vh;
 }
+
 .navbar#func-nav ul li{  
   padding-left: 8px;
   padding-right: 8px;
 }
+
 .navbar#func-nav ul li:hover{  
   background-color: #215d714d;
 }
+
 .navbar#func-nav ul li.active{
   color: #fff;
   background-color: #215d7191;
 }
+
 .navbar#func-nav ul li a{
   padding: 4px;
 }
+
 .navbar#func-nav ul li.active a{
   color: white;
 }
 
 #main-nav{
   height: 6vh;
-  background-color: #215d71;
+  background-color: #fff;
   font-size: 20px;
 }
+
 .container-fluid#mainNavBlank{
   padding: 0px;
   margin: 0px;
   height: 6vh;
 }
+
 .container-fluid#mainfuncNavBlank{
   padding: 0px;
   margin: 0px;
   height: 10vh;
 }
+
 .topImage{    
-  /* background-image: url("/images/background/3239.jpg"); */
+  background-image: url("/images/background/5098401.jpg");
   background-size: cover;
   min-height: 50vh;
+  background-color: #fff;
   background-position: center;
   /* filter: grayscale(80%); */
 }
+
 .topImage#teacherActivityTopImage{    
   background-image: url("/images/background/496.jpg");
 }
+
 .topImage#teacherGroupTopImage{    
   background-image: url("/images/background/905.jpg");
 }
+
 .topImage#studentTopImage{    
-  background-image: url("/images/background/3239.jpg");
+  background-image: url("/images/background/5098401.jpg");
 }
 
 #mynetwork{
@@ -195,8 +289,34 @@ a.tool{
   float: right;
   margin-top: 4px;
 }
+
 .modal {
   overflow-y:auto;
+}
+
+.text-right{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-primary{
+  background-color: #504EF4;
+  width: 50%;
+  margin: 20px auto;
+  border: 1px solid #fff;  /* 好看用 */
+  border-radius: 30px;
+  height: 3rem;
+}
+
+.btn-primary:hover{
+  background-color: #fff;
+  color: #504EF4;
+  width: 50%;
+  margin: 20px auto;
+  border: 1px solid #504EF4;  /* 好看用 */
+  border-radius: 30px;
 }
 
 .btn-addFavorite {
@@ -244,8 +364,19 @@ a.tool{
 #groupPracticeResults .row .col-3 #practiceList .card{
   width: 100%;
 }
+
+.card-header{
+  background-color: white;
+}
+
+.card-header:first-child {
+  border-radius: 30px;
+  border: white;
+}
+
 #groupPracticeResults .row .col-3 #practiceList .card .card-header{
-  background-color: rgb(42, 119, 145);
+  /* background-color: #215D71; */
+  color: #fff;
 }
 #groupPracticeResults .row .col-3 #practiceList .card .card-header a{
   color: white;  
@@ -254,6 +385,7 @@ a.tool{
 #groupPracticeResults .row .col-3 .card .card-header a img{
   max-width: 10%;
   height: auto;
+  color: #fff;
 }
 #groupPracticeResults .row .col-3 .card a.practiceMission{
   width: 100%;
@@ -263,6 +395,7 @@ a.tool{
 #groupPracticeResults .row .col-3 .card a.practiceMission .card-body{
   border-bottom: rgba(59, 142, 170, 0.575) dashed 0.1rem;
   height: 4vh;
+  position: fixed;
 }
 #groupPracticeResults .row .col-3 .card a.practiceMission .card-body:hover{
   background-color: rgba(59, 142, 170, 0.205);
@@ -279,6 +412,9 @@ a.tool{
 }
 #groupPracticeResults .row .col-9 .row.practiceCard .card .card-header>img{
   max-width: 2%;
+  color: #fff;
+  
+  border-radius: 30px;
 }
 /* #groupPracticeResults .row{
   padding: 0px;
@@ -460,6 +596,7 @@ a.tool{
 }
 #groupFileManager .row .card#groupFile>.card-header{
   background-color: rgba(130, 130, 130, 0.8);
+  background: #215D71;
 }
 /* #groupFileManager .row .card#personalFile>.card-body{
   min-height: 90vh;
@@ -472,6 +609,7 @@ a.tool{
 }
 .card-header .collapsed .fa.chevron {
   transform: rotate(90deg);
+  background: #000;
 }
 button .fa.chevron {
   transition: .3s transform ease-in-out;
