@@ -18,6 +18,7 @@ function isRoomExist (roomName, roomList) {
   return roomList[roomName] >= 0;
 }
 function isMemberInRoom(memberId, roomName, roomList){
+  console.log("memberId👉🏻 ", memberId);
   console.log(roomList[roomName].indexOf(memberId));
   return roomList[roomName].indexOf(memberId);
 }
@@ -46,6 +47,7 @@ io.on('connection', function(socket){
   //將會員加入socket-room
   socket.on('join room', function (data) {
     console.log('<join room>');
+    console.log('data-------------------- ', data)
     socket.memberId=data.memberId;
     let roomName='group'+data.groupId;
     socket.join(roomName, function(){
@@ -218,11 +220,12 @@ io.on('connection', function(socket){
   });
   socket.on('update node position', function(data){
     let roomName='group'+data.memberInfo.groupId;
-    groupData.updateNodePosition(data.memberInfo, data.updateNodeData, function(results){
+    groupData.updateNodePosition(data.updateNodeData, function(results){
       console.log('update by '+data.memberInfo.memberName);
       console.log(results);
       socket.nsp.to(roomName).emit('update node position',data.updateNodeData);
     });
+    console.log('data.updateNodeData000', data.updateNodeData);
   });
 });
 

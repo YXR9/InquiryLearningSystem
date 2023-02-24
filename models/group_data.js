@@ -537,20 +537,12 @@ module.exports = {
             cb(results);
         });
     },
-    updateNodePosition: function(memberInfo, data, cb){
-        // console.log(memberInfo);
-        let dataString=JSON.stringify(data);
-        dataString=dataString.replace(/{/g, "(");
-        dataString=dataString.replace(/}/g, ")");  
-        dataString=dataString.replace(/"node_id":/g,'');
-        dataString=dataString.replace(/"x":/g,'');
-        dataString=dataString.replace(/"y":/g,'');
-        dataString=dataString.substring(1, dataString.length-1);
-        // console.log(dataString);
-        let sql="INSERT into `node` (node_id, x, y) VALUES "
-        +dataString
-        +" ON DUPLICATE KEY UPDATE x=VALUES(x),y=VALUES(y)";
-        // console.log('sql = '+sql);
+    updateNodePosition: function(data, cb){
+        
+        let sql=`UPDATE node 
+        SET x=${data[0].x}, y=${data[0].y}
+        WHERE node_id=${data[0].node_id}` 
+
         pool.query(sql, function(err, results){
             if(err) throw err;
             cb('位置更新完成!');
