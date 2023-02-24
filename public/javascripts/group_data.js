@@ -547,7 +547,7 @@ module.exports = {
         dataString=dataString.replace(/"y":/g,'');
         dataString=dataString.substring(1, dataString.length-1);
         // console.log(dataString);
-        let sql="INSERT into `node` (node_id, x, y) VALUES "
+        let sql="INSERT INTO `node` (node_id, x, y) VALUES "
         +dataString
         +" ON DUPLICATE KEY UPDATE x=VALUES(x),y=VALUES(y)";
         // console.log('sql = '+sql);
