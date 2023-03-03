@@ -1,0 +1,35 @@
+version: '2.0'
+services:
+  app:
+    image: node:16.14.0
+    command: sh -c "npm install && npm start"
+    ports:
+      - 8000:8000
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      MARIADB_HOST: 140.115.126.19
+      MARIADB_USER: wulab
+      MARIADB_PASSWORD: ytwu35415
+      MARIADB_DB: inquiry
+  mysql:
+    image: mariadb #mysql
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+    restart: always
+    volumes:
+      - ./database:/var/lib/mysql
+    ports:
+      - "3306:3306"
+  phpmyadmin:
+    image: phpmyadmin
+    environment:
+      MA_HOST: mysql
+      UPLOAD_LIMIT: 1024M
+      MEMORY_LIMIT: 1024M
+      MAX_EXECUTION_TIME: 300
+      PMA_ARBITRARY: 1
+    ports:
+      - "8081:80"
+    restart: always
