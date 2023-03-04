@@ -20,8 +20,8 @@ services:
     restart: always
     volumes:
       - ./database:/var/lib/mysql
-    ports:
-      - "3306:3306"
+    #ports:
+    #  - "3306:3306"
   phpmyadmin:
     image: phpmyadmin
     environment:
@@ -31,5 +31,5 @@ services:
       MAX_EXECUTION_TIME: 300
       PMA_ARBITRARY: 1
     ports:
-      - "8081:80"
+      - "8082:80"
     restart: always
