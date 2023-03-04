@@ -9,7 +9,7 @@ services:
     volumes:
       - ./:/app
     environment:
-      MARIADB_HOST: 140.115.126.19
+      MARIADB_HOST: mysql
       MARIADB_USER: wulab
       MARIADB_PASSWORD: ytwu35415
       MARIADB_DB: inquiry
