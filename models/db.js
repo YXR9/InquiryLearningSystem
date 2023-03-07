@@ -1,5 +1,5 @@
 var mysql = require('mysql');
-var host = process.env.MARIADB.HOST
+var host = process.env.MARIADB_HOST
 var user = process.env.MARIADB_USER
 var password = process.env.MARIADB_PASSWORD
 var database = process.env.MARIADB_DB
