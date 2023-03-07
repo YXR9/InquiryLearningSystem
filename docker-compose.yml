@@ -1,17 +1,19 @@
 version: '2.0'
 services:
-  app:
-    image: node:16.14.0
-    command: sh -c "npm install && npm start"
+  inquiry-system:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: inquiry-system
+    # command: sh -c "npm install && npm start"
     ports:
       - 8000:8000
     working_dir: /app
-    volumes:
-      - ./:/app
+    restart: always
     environment:
-      MARIADB_HOST: 140.115.126.19
-      MARIADB_USER: wulab
-      MARIADB_PASSWORD: ytwu35415
+      MARIADB_HOST: mysql
+      MARIADB_USER: WuRet
+      MARIADB_PASSWORD: Ytwu.35415
       MARIADB_DB: inquiry
   mysql:
     image: mariadb #mysql
@@ -31,5 +33,5 @@ services:
       MAX_EXECUTION_TIME: 300
       PMA_ARBITRARY: 1
     ports:
-      - "8081:80"
+      - "8082:80"
     restart: always

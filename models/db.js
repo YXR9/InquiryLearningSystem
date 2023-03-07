@@ -1,8 +1,8 @@
 var mysql = require('mysql');
-var host = process.env.DB_HOST_URL || "140.115.126.19"
-var user = process.env.DB_USER_ACCOUNT || "wulab"
-var password = process.env.DB_USER_PASSWORD || "ytwu35415"
-var database = process.env.MYSQL_DATABASE || "inquiry"
+var host = process.env.MARIADB_HOST
+var user = process.env.MARIADB_USER
+var password = process.env.MARIADB_PASSWORD
+var database = process.env.MARIADB_DB
 
 var pool  = mysql.createPool({
     user: user,
