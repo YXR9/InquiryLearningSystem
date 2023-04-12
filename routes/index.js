@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
   } else if(req.session.memberId && req.session.memberIdentity === '學生'){
     res.redirect('/student');
   } else{
-    res.render('index', { title: '科學探究學習系統' });
+    res.render('index', { title: '合作探究學習平台' });
   }
 });
 
