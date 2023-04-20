@@ -57,7 +57,7 @@ $(document).ready(function(){
         let newList='<a type="button" class="practiceMission" href="#card'+value.node_id+'"><div class="card-body d-flex align-items-center">'+value.node_title+'</div></a>'
         $('#operationalObservationMission').append(newList);
         let newTable='<div class="row practiceCard" id="card'+value.node_id+'"><div class="card">'
-            +'<div class="card-header practiceTitle"><img src="/images/icons/operational-observation-white.svg" alt="操作觀察"> '+value.node_title+'</div>'
+            +'<div class="card-header practiceTitle"><img src="/images/icons/operational-observation-white.svg" alt="進行操作"> '+value.node_title+'</div>'
             +'<div class="card-header practiceInfo">'
             +'<table class="table"><tbody>'
             +'<tr><th scope="row">說明</th><td width="90%">'+value.operational_observation_info+'</td></tr>';
@@ -100,7 +100,7 @@ $(document).ready(function(){
         let newList='<a type="button" class="practiceMission" href="#card'+value.node_id+'"><div class="card-body d-flex align-items-center">'+value.node_title+'</div></a>'
         $('#experimentMission').append(newList);
         let newTable='<div class="row practiceCard" id="card'+value.node_id+'"><div class="card">'
-            +'<div class="card-header practiceTitle"><img src="/images/icons/experiment-white.svg" alt="實驗"> '+value.node_title+'</div>'
+            +'<div class="card-header practiceTitle"><img src="/images/icons/experiment-white.svg" alt="進行實驗"> '+value.node_title+'</div>'
             +'<div class="card-header practiceInfo">'
             +'<table class="table"><tbody>'
             +'<tr><th scope="row">研究假設</th><td width="90%">'+value.research_hypothesis+'</td></tr>'
