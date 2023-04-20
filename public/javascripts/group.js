@@ -48,7 +48,7 @@ var options = {
         key_question: {
             color: { background: "rgb(255,255,255)", border: "rgba(0,0,0,0)" },
             shape: "image",
-            image: "/images/icons/key-question-red.svg"
+            image: "/images/icons/question-yellow.png"
         },
         idea: {
             color: { background: "rgb(255,255,255)", border: "rgba(0,0,0,0)" },
@@ -1318,13 +1318,13 @@ $(document).ready(function(){
                         }
                     },
                     "addOperationalObservation": {
-                        name: "操作觀察",
+                        name: "進行操作",
                         callback: function(itemKey, opt, e){
                             $('#addOperationalObservation').modal('show');
                         }
                     },
                     "addExperiment": {
-                        name: "實驗",
+                        name: "進行實驗",
                         callback: function(itemKey, opt, e){
                             $('#addExperiment').modal('show');
                         }
