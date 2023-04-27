@@ -65,7 +65,7 @@ function saveAndMoveAttachment(oldPath, uploadPath, file, nodeId, share, memberI
     return new Promise(function(resolve){
         let fileNameAndType= getFileNameAndType(file.originalname);        
         fs.rename(oldPath, uploadPath+'/'+fileNameAndType[0], function(err){
-            if(err) throw err;
+            if(err) return; //throw  err;
             console.log("檔案移動完成");
             groupData.addAttachment(nodeId, share, memberId, groupId, fileNameAndType[0], fileNameAndType[1], function(data){
                 resolve(data);
@@ -88,7 +88,7 @@ function uploadGroupFile(originalname, path, url, nodeId, memberId, groupId){
             let fileName= data[0];
             let fileType= data[1];
             fs.copyFile(path,url+'/'+fileName, function(err){
-                if(err) throw err;
+                if(err) return; //throw  err;
                 // console.log(url+'/'+fileName+"檔案移動完成");   
                 groupData.addAttachment(nodeId, 1, memberId, groupId, fileName, fileType, function(data){
                     resolve(data[0]);

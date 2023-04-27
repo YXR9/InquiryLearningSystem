@@ -82,7 +82,7 @@ function saveAndMoveAttachment(oldPath, uploadPath, file, nodeId, share, memberI
     return new Promise(function(resolve){
         let fileNameAndType= getFileNameAndType(file.originalname);        
         fs.rename(oldPath, uploadPath+'/'+fileNameAndType[0], function(err){
-            if(err) throw err;
+            if(err) return; //throw  err;
             console.log("檔案移動完成");
             groupData.addAttachment(nodeId, share, memberId, groupId, fileNameAndType[0], fileNameAndType[1], function(data){
                 resolve(data);
@@ -181,7 +181,7 @@ router.post('/add_key_question', upload.array('file', 5), function(req, res, nex
                     req.files.forEach(function(value, index){
                         let fileNameAndType= getFileNameAndType(value.originalname);
                         fs.rename(value.path,url+'/'+fileNameAndType[0], function(err){
-                            if(err) throw err;
+                            if(err) return; //throw  err;
                             console.log("檔案移動完成");   
                             groupData.addAttachment(nodeId, 1,req.session.memberId, groupId, fileNameAndType[0], fileNameAndType[1], function(data){
                                 console.log(data);
@@ -221,7 +221,7 @@ router.post('/add_idea', upload.array('file', 5), function(req, res, next){
                     req.files.forEach(function(value, index){
                         let fileNameAndType= getFileNameAndType(value.originalname);
                         fs.rename(value.path,url+'/'+fileNameAndType[0], function(err){
-                            if(err) throw err;
+                            if(err) return; //throw  err;
                             console.log("檔案移動完成");   
                             groupData.addAttachment(nodeId, 1,req.session.memberId, groupId, fileNameAndType[0], fileNameAndType[1], function(data){
                                 console.log(data);
@@ -265,7 +265,7 @@ router.post('/upload_textarea_image', upload.single('image'), function(req, res)
     setUploadPath(req.body.groupId).then(function(url){
         let fileNameAndType= getTextareaImageNameAndType(req.file.originalname, req.session.memberId);
         fs.rename(req.file.path,url+'/'+fileNameAndType[0], function(err){
-            if(err) throw err;
+            if(err) return; //throw  err;
             console.log("檔案移動完成");
             res.send({imageUrl: '/files/group'+req.body.groupId+'/'+fileNameAndType[0]});
         });
@@ -528,7 +528,7 @@ router.post('/remove_personal_attachment', function(req, res, next){
         }else{
             let filePath= './public/files/group'+req.body.groupId+'/'+req.body.attachmentName;
             fs.unlink(filePath, function(err){
-                if(err) throw err;
+                if(err) return; //throw  err;
                 console.log('刪除'+filePath+'成功！');
                 res.send(data.finished);
             });

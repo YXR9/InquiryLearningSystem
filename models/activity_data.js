@@ -8,7 +8,7 @@ function getGroupData(group_id){
         +"LEFT JOIN `member` m ON gm.member_id=m.member_id "
         +"WHERE ag.group_id=? GROUP BY ag.group_id";
         pool.query(sql, group_id, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             resolve(results[0]);
             console.log("Hi~success!")
         });
@@ -27,7 +27,7 @@ function makerandomkey(letter,number) {
 function newFolder(group_id){
     if(!fs.existsSync('./public/files/group'+group_id)){
         fs.mkdirSync('./public/files/group'+group_id, {recursive: true}, (err)=>{
-            if(err) throw err;
+            if(err) return; //throw  err;
         });
     }
 }
@@ -38,7 +38,7 @@ function getGroupStudentData(group_id){
         +"LEFT JOIN `member` m ON gm.member_id=m.member_id "
         +"WHERE ag.group_id=? GROUP BY ag.group_id";
         pool.query(sql, group_id, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             resolve(results);
         });
     });
@@ -51,7 +51,7 @@ function getGroupTeacherData(group_id){
         +"LEFT JOIN `member` m ON m.member_id=a.member_id "
         +"WHERE ag.group_id=?";
         pool.query(sql, group_id, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             resolve(results);
         });
     });
@@ -60,7 +60,7 @@ function teacherPersonalNoteInGroup(groupId, memberId){
     return new Promise(function(resolve){
         let sql='INSERT INTO `personal_note` SET group_id=?, member_id=?';
         pool.query(sql, [groupId, memberId], function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             resolve({finished: true});
         });
     });
@@ -70,7 +70,7 @@ module.exports = {
         console.log("checkActivityIdentity: "+memberId+" "+activityId);
         let sql="SELECT * FROM `activity` WHERE member_id=? AND activity_id=?";
         pool.query(sql, [memberId, activityId], function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             console.log(results);
             if(results.length > 0) cb({checked: true});
             else cb({checked: false});
@@ -84,7 +84,7 @@ module.exports = {
         "LEFT JOIN `group_member` gm ON g.group_id = gm.group_id",
         "WHERE a.member_id=? GROUP BY activity_id"].join(' ');
         pool.query(sql, memberId, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             cb(results);
         });
     },
@@ -97,7 +97,7 @@ module.exports = {
         }
         let sql="INSERT INTO `activity` SET?";
         pool.query(sql, sqlValue, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             console.log("Inserted id= "+results.insertId);
             newActivityId = results.insertId;
             let sqlValue2 = [];
@@ -112,14 +112,14 @@ module.exports = {
                 ]);            
             }
             pool.query(sql2, [sqlValue2], function(err, results2){
-                if(err) throw err; 
+                if(err) return; //throw  err; 
                 var sql3="SELECT a.*, COUNT(a.activity_id) AS group_count FROM `activity` a INNER JOIN `activity_group` g ON a.activity_id = g.activity_id WHERE a.member_id=? GROUP BY activity_id";
                 pool.query(sql3, memberId, function(err, results3){
-                    if(err) throw err;
+                    if(err) return; //throw  err;
                     console.log(results3);
                     var sql4="SELECT ag.group_id FROM `activity` a INNER JOIN `activity_group` ag ON a.activity_id=ag.activity_id WHERE a.activity_id=?";
                     pool.query(sql4, newActivityId , function(err, results4){
-                        if(err) throw err;
+                        if(err) return; //throw  err;
                         console.log(results4);
                         results4.forEach(function(item){
                             newFolder(item.group_id);                            
@@ -139,7 +139,7 @@ module.exports = {
     getActivityInfo: function(activityId, cb){
         let sql="SELECT * FROM `activity` a WHERE a.activity_id=?";
         pool.query(sql, activityId, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             cb(results);
         });
     },
@@ -147,7 +147,7 @@ module.exports = {
         let groupData=[];
         let sql="SELECT group_id FROM `activity_group` WHERE activity_id=?";
         pool.query(sql, activityId, function(err, results){  
-            if(err) throw err;
+            if(err) return; //throw  err;
             let groupPromises = results.map(function(group){
                 return getGroupData(group.group_id)
                 .then(function(data){
@@ -174,10 +174,10 @@ module.exports = {
             ]);
         }
         pool.query(sql, [sqlValue], function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             let sql2="SELECT ag.group_id FROM `activity` a INNER JOIN `activity_group` ag ON a.activity_id=ag.activity_id WHERE a.activity_id=?";
             pool.query(sql2, activityId, function(err, results2){
-                if(err) throw err;
+                if(err) return; //throw  err;
                 console.log(results2);
                 results2.forEach(function(item, index){
                     newFolder(item.group_id);
@@ -194,7 +194,7 @@ module.exports = {
     getGroup: function(groupId, cb){
         let sql="SELECT * FROM `activity_group` ag WHERE ag.group_id=?";
         pool.query(sql, groupId, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             cb(results);
         });
     },
@@ -202,14 +202,14 @@ module.exports = {
         //確認該小組代碼是否存在
         let sql="SELECT group_id, activity_id FROM `activity_group` WHERE group_key=?";
         pool.query(sql, groupKey, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             if(results.length > 0){
                 let groupId=results[0].group_id;     
                 let activityId=results[0].activity_id;    
                 //取得該活動下全部的小組
                 let sql2="SELECT a.activity_title,ag.group_id FROM `activity_group` ag INNER JOIN `activity` a ON a.activity_id=ag.activity_id WHERE ag.activity_id=?";
                 pool.query(sql2, activityId, function(err, results2){
-                    if(err) throw err;
+                    if(err) return; //throw  err;
                     let activityTitle= results2[0].activity_title;
                     let groupFilter='(';
                     for(let i=0;i<results2.length;i++){
@@ -221,7 +221,7 @@ module.exports = {
                     //確認該小組成員是否已加入活動
                     let sql3="SELECT * FROM `group_member` WHERE member_id=? AND group_id IN "+groupFilter;
                     pool.query(sql3, memberId, function(err, results3){
-                        if(err) throw err;
+                        if(err) return; //throw  err;
                         //尚未加入活動任一小組
                         if(results3.length < 1){                            
                             let sql4="INSERT INTO `group_member` SET ?";
@@ -230,7 +230,7 @@ module.exports = {
                                 member_id: memberId
                             }
                             pool.query(sql4, sqlValue4, function(err){
-                                if(err) throw err;
+                                if(err) return; //throw  err;
                                 let sql5="INSERT INTO `member_read_node` SET ?";
                                 let sqlValue5={
                                     group_id: groupId,
@@ -245,10 +245,10 @@ module.exports = {
                                     read_attachment_node: "-1"
                                 }
                                 pool.query(sql5, sqlValue5, function(err){
-                                    if(err) throw err;
+                                    if(err) return; //throw  err;
                                     let sql6='INSERT INTO `personal_note` SET group_id=?, member_id=?';
                                     pool.query(sql6, [groupId, memberId], function(err, results){
-                                       if(err) throw err;
+                                       if(err) return; //throw  err;
                                        cb({state: true, msg: "成功加入小組！"});
                                     });
                                 });
@@ -267,7 +267,7 @@ module.exports = {
     getJoinedGroup: function(memberId, cb){
         let sql="SELECT group_id FROM `group_member` gm WHERE gm.member_id=? ORDER BY gm.group_id DESC";
         pool.query(sql, memberId, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             let groupStudentData=[];
             let groupTeacherData=[];
             var studentPromises = results.map(function(group){
@@ -294,7 +294,7 @@ module.exports = {
         return new Promise(function(resolve){
             let sql= 'SELECT *, DATE_FORMAT(broadcast_time, "%Y-%m-%d %T") AS create_time, GROUP_CONCAT(broadcast_group_name) AS group_name, GROUP_CONCAT(broadcast_group_id) AS group_id, GROUP_CONCAT(broadcast_node_id) AS node_id FROM `broadcast` WHERE broadcast_activity_id=? AND member_id=? GROUP BY broadcast_message, broadcast_type ORDER BY broadcast_time DESC';
             pool.query(sql, [activityId, memberId], function(err, results){
-                if(err) throw err;
+                if(err) return; //throw  err;
                 resolve(results);
             });
         });
@@ -312,12 +312,12 @@ module.exports = {
                 member_id: memberId
             }
             pool.query(sql, sqlValue, function(err, results){
-                if(err) throw err;
+                if(err) return; //throw  err;
                 let newBroadcastId= results.insertId;
                 console.log('newBroadcastId: '+newBroadcastId);
                 let sql2= 'SELECT * FROM `broadcast` WHERE broadcast_id=?';
                 pool.query(sql2, newBroadcastId, function(err, results){
-                    if(err) throw err;
+                    if(err) return; //throw  err;
                     console.log(results);
                     resolve(results[0]);
                 });                
