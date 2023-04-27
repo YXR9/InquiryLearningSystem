@@ -12,11 +12,11 @@ function newNode(type, memberId, memberName, nodeTitle, groupId){
             node_read_count: 0
         }
         pool.query(sql, sqlValue, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             var newNodeId = results.insertId;
             let sql2='INSERT INTO `node_read_count` SET group_id= ?, node_id= ?, read_node_member_list="-1"'
             pool.query(sql2, [groupId, newNodeId], function(err, results){
-                if(err) throw err;
+                if(err) return; //throw  err;
                 resolve(newNodeId);
             });
         });        
@@ -26,7 +26,7 @@ function editNodeTitle(nodeId, nodeTitle){
     return new Promise(function(resolve){
         let sql="UPDATE `node` SET node_title=? WHERE node_id=?";
         pool.query(sql, [nodeTitle, nodeId], function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             resolve({finished: true});
         });
     });
@@ -40,7 +40,7 @@ function newEdge(fromId, toId, groupId){
             group_id: groupId
         }
         pool.query(sql, sqlValue, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             var newEdgeId = results.insertId;
             console.log('findish edge id='+newEdgeId);
             resolve(newEdgeId);
@@ -56,7 +56,7 @@ function newIdea(nodeId, ideaContent, countScaffold){
             idea_scaffold: countScaffold
         }
         pool.query(sql, sqlValue, function(err){
-            if(err) throw err;
+            if(err) return; //throw  err;
             resolve(nodeId);
         })       
     });
@@ -65,7 +65,7 @@ function editIdea(nodeId, ideaContent, countScaffold){
     return new Promise(function(resolve){
         let sql="UPDATE `idea` SET idea_content=?, idea_scaffold=? WHERE node_id=?";
         pool.query(sql, [ideaContent, countScaffold, nodeId], function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             resolve({finished: true});
         });
     });
@@ -78,7 +78,7 @@ function newKeyQuestion(nodeId, keyQuestionInfo){
             key_question_info: keyQuestionInfo
         }              
         pool.query(sql, sqlValue, function(err){
-            if(err) throw err;
+            if(err) return; //throw  err;
             resolve(nodeId);
         })       
     });
@@ -87,7 +87,7 @@ function editKeyQuestion(nodeId, keyQuestionInfo){
     return new Promise(function(resolve){
         let sql="UPDATE `key_question` SET key_question_info=? WHERE node_id=?";
         pool.query(sql, [keyQuestionInfo, nodeId], function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             resolve({finished: true});
         });
     });
@@ -100,7 +100,7 @@ function newDirectiveObservation(nodeId, directiveObservationInfo){
             directive_observation_info: directiveObservationInfo
         }              
         pool.query(sql, sqlValue, function(err){
-            if(err) throw err;
+            if(err) return; //throw  err;
             resolve(nodeId);
         })       
     });
@@ -109,7 +109,7 @@ function editDirectiveObservation(nodeId, directiveObservationInfo){
     return new Promise(function(resolve){
         let sql="UPDATE `directive_observation` SET directive_observation_info=? WHERE node_id=?";
         pool.query(sql, [directiveObservationInfo, nodeId], function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             resolve({finished: true});
         });
     });
@@ -123,13 +123,13 @@ function newDirectiveObservationRecord(memberId, directiveObservationId, record)
             member_id: memberId
         }
         pool.query(sql, sqlValue, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             let newRecordId=results.insertId;
             let sql2="SELECT dov.*, m.member_name FROM `directive_observation_record` dov"
             +" INNER JOIN `member` m ON dov.member_id=m.member_id"
             +" WHERE `directive_observation_record_id`=?";
             pool.query(sql2, newRecordId, function(err, results){
-                if(err) throw err;
+                if(err) return; //throw  err;
                 resolve(results);
             });
         });
@@ -145,7 +145,7 @@ function newOperationalObservation(nodeId, operationalObservationInfo, steps, ma
             materials: materials
         }
         pool.query(sql, sqlValue, function(err){
-            if(err) throw err;
+            if(err) return; //throw  err;
             resolve(nodeId);
         })
     });
@@ -154,7 +154,7 @@ function editOperationalObservation(nodeId, operationalObservationInfo, steps, m
     return new Promise(function(resolve){
         let sql="UPDATE `operational_observation` SET operational_observation_info=?, steps=?, materials=? WHERE node_id=?";
         pool.query(sql, [operationalObservationInfo, steps, materials, nodeId], function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             resolve({finished: true});
         });
     });
@@ -168,13 +168,13 @@ function newOperationalObservationRecord(memberId, operationalObservationId, rec
             member_id: memberId
         }
         pool.query(sql, sqlValue, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             let newRecordId=results.insertId;
             let sql2="SELECT dov.*, m.member_name FROM `operational_observation_record` dov"
             +" INNER JOIN `member` m ON dov.member_id=m.member_id"
             +" WHERE `operational_observation_record_id`=?";
             pool.query(sql2, newRecordId, function(err, results){
-                if(err) throw err;
+                if(err) return; //throw  err;
                 resolve(results);
             });
         });
@@ -190,7 +190,7 @@ function newExperiment(nodeId, researchHypothesis, researchMotivation, memberNam
             last_editor: memberName
         }
         pool.query(sql, sqlValue, function(err){
-            if(err) throw err;
+            if(err) return; //throw  err;
             resolve(nodeId);
         })
     });
@@ -199,7 +199,7 @@ function editExperiment(nodeId, researchHypothesis, researchMotivation){
     return new Promise(function(resolve){
         let sql="UPDATE `experiment` SET research_hypothesis=?, research_motivation=? WHERE node_id=?";
         pool.query(sql, [researchHypothesis, researchMotivation, nodeId], function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             resolve({finished: true});
         });
     });
@@ -208,7 +208,7 @@ function updateExperimentRecordNodeId(recordNodeId, nodeId){
     return new Promise(function(resolve){
         let sql= 'UPDATE `experiment` SET experiment_record_node_id=? WHERE node_id=?';
         pool.query(sql, [recordNodeId, nodeId], function(err){
-            if(err) throw err;
+            if(err) return; //throw  err;
             resolve({finished: true});
         });
     });
@@ -223,13 +223,13 @@ function newExperimentRecord(memberId, nodeId, experimentId, record){
             member_id: memberId
         }
         pool.query(sql, sqlValue, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             let newRecordId=results.insertId;
             let sql2="SELECT er.*, m.member_name FROM `experiment_record` er"
             +" INNER JOIN `member` m ON er.member_id=m.member_id"
             +" WHERE `experiment_record_id`=?";
             pool.query(sql2, newRecordId, function(err, results){
-                if(err) throw err;
+                if(err) return; //throw  err;
                 resolve(results);
             });
         });
@@ -248,7 +248,7 @@ function newAttachment(nodeId, attachmentName, attachmentType, share, memberId, 
 
         }              
         pool.query(sql, sqlValue, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             resolve(results.insertId);
         })       
     })
@@ -257,20 +257,20 @@ function addReadCount(nodeId, memberId, groupId, nodeType){
     return new Promise(function(resolve){
         let sql="UPDATE `node` SET node_read_count=node_read_count+1 WHERE node_id=?";
         pool.query(sql, nodeId, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             let sql2='UPDATE `node_read_count` SET'
             +' node_read_count=node_read_count+1,'
             +' read_node_member_list=CONCAT(read_node_member_list,",","'+memberId+'")'
             +' WHERE node_id=?';
             pool.query(sql2, nodeId, function(err, results){
-                if(err) throw err;
+                if(err) return; //throw  err;
                 let sql3='UPDATE `member_read_node` SET'
                 +' read_node_count=read_node_count+1'
                 +' ,read_node_list= CONCAT(read_node_list,",","'+nodeId+'")' 
                 +' ,read_'+nodeType+'_node= CONCAT(read_'+nodeType+'_node,",","'+nodeId+'")'               
                 +' WHERE member_id=? AND group_id=?';
                 pool.query(sql3, [memberId, groupId], function(err, results){
-                    if(err) throw err;
+                    if(err) return; //throw  err;
                     resolve({finished: true});
                 });
             });
@@ -281,7 +281,7 @@ function addRevisedCount(nodeId){
     return new Promise(function(resolve){
         let sql="UPDATE `node` SET node_revised_count=node_revised_count+1 WHERE node_id=?";
         pool.query(sql, nodeId, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             resolve({finished: true});
         });
     });
@@ -290,7 +290,7 @@ function getNodeInfo(nodeId){
     return new Promise(function(resolve){
         let sql="SELECT n.*, COUNT(a.attachment_id) AS attachment_count, DATE_FORMAT(n.node_create_time, '%Y-%m-%d %T') AS create_time FROM `node` n LEFT JOIN `attachment` a ON n.node_id=a.node_id WHERE n.node_id=?";
         pool.query(sql, nodeId, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             resolve(results);
         });
     });    
@@ -299,7 +299,7 @@ function getNodeAttachment(nodeId){
     return new Promise(function(resolve){
         let sql= 'SELECT * FROM `attachment` WHERE node_id=?';
         pool.query(sql, nodeId, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             resolve(results);
         });
     });    
@@ -308,7 +308,7 @@ function getEdgeByEdgeTo(nodeId){
     return new Promise(function(resolve){
         let sql="SELECT * FROM `edge` WHERE edge_to=?";
         pool.query(sql, nodeId, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             resolve(results);
         });
     });    
@@ -317,7 +317,7 @@ function checkFavorite(nodeId, memberId){
     return new Promise(function(resolve){
         let sql="SELECT * FROM `favorite_idea` WHERE node_id=? AND member_id=?";
         pool.query(sql, [nodeId, memberId], function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             console.log(results);
             if(results.length > 0){
                 resolve({checked: true});
@@ -335,7 +335,7 @@ function getGroupDirectiveObservation(groupId){
         +" INNER JOIN `member` m ON m.member_id=dovr.member_id"
         +" WHERE n.group_id=? ORDER BY n.node_id ASC";
         pool.query(sql, groupId, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             resolve(results);
         });
     });    
@@ -348,7 +348,7 @@ function getGroupOperationalObservation(groupId){
         +" INNER JOIN `member` m ON m.member_id=oovr.member_id"
         +" WHERE n.group_id=? ORDER BY n.node_id ASC";
         pool.query(sql, groupId, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             resolve(results);
         });
     });    
@@ -362,7 +362,7 @@ function getGroupExperiment(groupId){
         +" WHERE n.group_id=? AND n.node_type='experiment'"
         +" ORDER BY n.node_id ASC";
         pool.query(sql, groupId, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             resolve(results);
         });
     });
@@ -371,7 +371,7 @@ function countMemberViewType(memberId, groupId){
     return new Promise(function(resolve){
         let sql= 'SELECT mrn.*, m.member_name FROM `member_read_node` mrn INNER JOIN `member` m ON m.member_id=mrn.member_id WHERE mrn.member_id=? AND mrn.group_id=? ORDER BY mrn.member_id ASC';
         pool.query(sql, [memberId, groupId], function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             let keyQuestionNumber=results[0].read_key_question_node.split(',').length-1;
             let ideaNumber=results[0].read_idea_node.split(',').length-1;
             let directiveObservationNumber=results[0].read_directive_observation_node.split(',').length-1;
@@ -396,7 +396,7 @@ function getGroupMemberList(groupId){
     return new Promise(function(resolve){
         let sql="SELECT member_id, read_node_list FROM `member_read_node` WHERE group_id=?";
         pool.query(sql, groupId, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             resolve(results);
         });        
     });    
@@ -405,10 +405,10 @@ function countMemberAddType(memberId, groupId){
     return new Promise(function(resolve){
         let sql= 'SELECT COUNT(node_id) AS number, node_type FROM `node` WHERE member_id=? AND group_id=? GROUP BY node_type';
         pool.query(sql, [memberId, groupId], function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             let sql2='SELECT member_name FROM `member` WHERE member_id=?';
             pool.query(sql2, memberId, function(err, results2){
-                if(err) throw err;
+                if(err) return; //throw  err;
                 let data= {memberId: memberId, memberName: results2[0].member_name, count: results}
                 // console.log(data);
                 resolve(data);
@@ -420,10 +420,10 @@ function countMemberReviseType(memberId, groupId){
     return new Promise(function(resolve){
         let sql= 'SELECT SUM(node_revised_count) AS number, node_type FROM `node` WHERE member_id=? AND group_id=? GROUP BY node_type';
         pool.query(sql, [memberId, groupId], function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             let sql2='SELECT member_name FROM `member` WHERE member_id=?';
             pool.query(sql2, memberId, function(err, results2){
-                if(err) throw err;
+                if(err) return; //throw  err;
                 let data= {memberId: memberId, memberName: results2[0].member_name, count: results}
                 // console.log(data);
                 resolve(data);
@@ -435,10 +435,10 @@ function countMemberBuildOnType(memberId, groupId){
     return new Promise(function(resolve){
         let sql= 'SELECT COUNT(n.node_id) AS number, node_type FROM `node` n INNER JOIN `edge` e ON n.node_id=e.edge_to WHERE n.member_id=? AND n.group_id=? GROUP BY n.node_type';
         pool.query(sql, [memberId, groupId], function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             let sql2='SELECT member_name FROM `member` WHERE member_id=?';
             pool.query(sql2, memberId, function(err, results2){
-                if(err) throw err;
+                if(err) return; //throw  err;
                 let data= {memberId: memberId, memberName: results2[0].member_name, count: results}
                 // console.log(data);
                 resolve(data);
@@ -450,10 +450,10 @@ function countSaffoldType(memberId, groupId){
     return new Promise(function(resolve){
         let sql='SELECT i.idea_scaffold FROM `node` n INNER JOIN `idea` i ON n.node_id=i.node_id WHERE n.member_id=? AND n.group_id=? AND i.idea_scaffold IS NOT NULL';
         pool.query(sql, [memberId, groupId], function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             let sql2='SELECT member_name FROM `member` WHERE member_id=?';
             pool.query(sql2, memberId, function(err, results2){
-                if(err) throw err;
+                if(err) return; //throw  err;
                 let data= {memberId: memberId, memberName: results2[0].member_name, count: results}
                 // console.log(data);
                 resolve(data);
@@ -465,7 +465,7 @@ function getGroupSharedFile(groupId){
     return new Promise(function(resolve){
         let sql='SELECT a.*, m.member_name, n.node_type, n.node_title FROM `attachment` a INNER JOIN `member` m ON a.member_id=m.member_id LEFT JOIN `node` n ON n.node_id=a.node_id WHERE a.group_id=? AND a.share=1';
         pool.query(sql, groupId, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             resolve(results);
         });
     });    
@@ -474,7 +474,7 @@ function getGroupPersonalFile(groupId, memberId){
     return new Promise(function(resolve){
         let sql='SELECT * FROM `attachment` WHERE group_id=? AND member_id=? AND share=0';
         pool.query(sql, [groupId, memberId], function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             resolve(results);
         });
     }); 
@@ -483,7 +483,7 @@ function getAttachmentByNodeId(nodeId){
     return new Promise(function(resolve){
         let sql='SELECT * FROM `attachment` a INNER JOIN `member` m ON a.member_id=m.member_id WHERE a.node_id=?';
         pool.query(sql, nodeId, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             resolve(results);
         });
     });
@@ -492,10 +492,10 @@ function shareAttachment(attachmentId){
     return new Promise(function(resolve){
         let sql='UPDATE `attachment` SET share=1 WHERE attachment_id=?';
         pool.query(sql, attachmentId, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             let sql2= 'SELECT * FROM `attachment` a INNER JOIN `member` m ON a.member_id=m.member_id WHERE a.attachment_id=?';
             pool.query(sql2, attachmentId, function(err, results){
-                if(err) throw err;
+                if(err) return; //throw  err;
                 resolve(results);
             });
         });
@@ -506,7 +506,7 @@ module.exports = {
         console.log("checkTeacherGroupIdentity: "+memberId+" "+groupId);
         let sql="SELECT * FROM `activity_group` WHERE member_id=? AND group_id=? AND activity_id=?";
         pool.query(sql, [memberId, groupId, activityId], function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             console.log(results);
             if(results.length>0) return cb({checked: true});
             else return cb({checked: false});
@@ -517,7 +517,7 @@ module.exports = {
         let sql="SELECT * FROM `activity_group` ag INNER JOIN `group_member` gm"
         +" ON ag.group_id=gm.group_id WHERE gm.member_id=? AND ag.group_id=? AND ag.activity_id=?";
         pool.query(sql, [memberId, groupId, activityId], function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             console.log(results);
             if(results.length>0) return cb({checked: true});
             else return cb({checked: false});
@@ -526,14 +526,14 @@ module.exports = {
     getGroupNode: function(groupId, cb){
         let sql="SELECT n.*, DATE_FORMAT(n.node_create_time, '%m-%d %T') AS create_time, COUNT(a.attachment_id) AS attachment_count FROM `node` n LEFT JOIN `attachment` a ON n.node_id=a.node_id WHERE n.group_id=/images";
         pool.query(sql, groupId, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             cb(results);
         });
     },
     getGroupEdge: function(groupId, cb){
         let sql="SELECT * FROM `edge`  WHERE group_id=?";
         pool.query(sql, groupId, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             cb(results);
         });
     },
@@ -552,7 +552,7 @@ module.exports = {
         +" ON DUPLICATE KEY UPDATE x=VALUES(x),y=VALUES(y)";
         // console.log('sql = '+sql);
         pool.query(sql, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             cb('位置更新完成!');
         });
     },
@@ -598,7 +598,7 @@ module.exports = {
             // console.log(attachmentData);
             let sql="SELECT n.*,i.*, DATE_FORMAT(n.node_create_time, '%Y-%m-%d %T') AS create_time FROM `node` n INNER JOIN `idea` i ON n.node_id=i.node_id WHERE n.node_id=?";
             pool.query(sql, nodeId, function(err, results){
-                if(err) throw err;
+                if(err) return; //throw  err;
                 cb({ideaData: results, checkFavorite: check.checked, attachmentData: attachmentData});
             });
         });        
@@ -657,7 +657,7 @@ module.exports = {
             // console.log(attachmentData);
             let sql="SELECT n.*, kq.*, DATE_FORMAT(n.node_create_time, '%Y-%m-%d %T') AS create_time FROM `node` n INNER JOIN `key_question` kq ON n.node_id=kq.node_id WHERE n.node_id=?";
             pool.query(sql, nodeId, function(err, results){
-                if(err) throw err;
+                if(err) return; //throw  err;
                 cb({keyQuestionData: results, attachmentData: attachmentData});
             });
         });  ;        
@@ -708,7 +708,7 @@ module.exports = {
         addReadCount(nodeId, memberId, groupId, "directive_observation").then(function(){
             let sql="SELECT n.*, dov.*, DATE_FORMAT(n.node_create_time, '%Y-%m-%d %T') AS create_time FROM `node` n INNER JOIN `directive_observation` dov ON n.node_id=dov.node_id WHERE n.node_id=?";
             pool.query(sql, nodeId, function(err, results){
-                if(err) throw err;
+                if(err) return; //throw  err;
                 cb(results);
             });
         });        
@@ -731,7 +731,7 @@ module.exports = {
     addDirectiveObservationRecord: function(nodeId, memberId, directiveObservationRecord, cb){
         let sql='SELECT `directive_observation_id` FROM `directive_observation` WHERE node_id=?';
         pool.query(sql, nodeId, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             newDirectiveObservationRecord(memberId, results[0].directive_observation_id, directiveObservationRecord)
             .then(function(data){
                 console.log(data);
@@ -746,7 +746,7 @@ module.exports = {
         +" INNER JOIN `member` m ON m.member_id=dovr.member_id"
         +" WHERE n.node_id=?";
         pool.query(sql, nodeId, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             cb(results);
         });
     },
@@ -796,7 +796,7 @@ module.exports = {
         addReadCount(nodeId, memberId, groupId, "operational_observation").then(function(){
             let sql="SELECT n.*, oov.*, DATE_FORMAT(n.node_create_time, '%Y-%m-%d %T') AS create_time FROM `node` n INNER JOIN `operational_observation` oov ON n.node_id=oov.node_id WHERE n.node_id=?";
             pool.query(sql, nodeId, function(err, results){
-                if(err) throw err;
+                if(err) return; //throw  err;
                 cb(results);
             });
         });        
@@ -804,7 +804,7 @@ module.exports = {
     addOperationalObservationRecord: function(nodeId, memberId, operationalObservationRecord, cb){
         let sql='SELECT `operational_observation_id` FROM `operational_observation` WHERE node_id=?';
         pool.query(sql, nodeId, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             newOperationalObservationRecord(memberId, results[0].operational_observation_id, operationalObservationRecord)
             .then(function(data){
                 console.log(data);
@@ -819,7 +819,7 @@ module.exports = {
         +" INNER JOIN `member` m ON m.member_id=oovr.member_id"
         +" WHERE n.node_id=?";
         pool.query(sql, nodeId, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             cb(results);
         });
     },
@@ -855,7 +855,7 @@ module.exports = {
         addReadCount(nodeId, memberId, groupId, "experiment").then(function(){
             let sql="SELECT n.*, e.*, DATE_FORMAT(n.node_create_time, '%Y-%m-%d %T') AS create_time FROM `node` n INNER JOIN `experiment` e ON n.node_id=e.node_id WHERE n.node_id=?";
             pool.query(sql, nodeId, function(err, results){
-                if(err) throw err;
+                if(err) return; //throw  err;
                 cb(results);
             });
         });
@@ -902,13 +902,13 @@ module.exports = {
     getExperimentRecordNode: function(nodeId, memberId, groupId, cb){
         let sql='SELECT node_id FROM `experiment` WHERE experiment_record_node_id=?';
         pool.query(sql, nodeId, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             let experimentNodeId= results[0].node_id;
             console.log(experimentNodeId);
             addReadCount(experimentNodeId, memberId, groupId, "experiment_record").then(function(){
                 let sql="SELECT m.member_name, e.*, er.*, n.node_title, n.node_author, n.node_create_time, n.node_read_count, DATE_FORMAT(n.node_create_time, '%Y-%m-%d %T') AS create_time FROM `experiment` e INNER JOIN `node` n ON n.node_id=e.node_id LEFT JOIN `experiment_record` er ON e.experiment_record_node_id=er.node_id LEFT JOIN `member` m ON m.member_id=er.member_id WHERE e.node_id=?";
                 pool.query(sql, experimentNodeId, function(err, results){
-                    if(err) throw err;
+                    if(err) return; //throw  err;
                     cb(results);
                 });
             });
@@ -917,7 +917,7 @@ module.exports = {
     addExperimentRecord: function(nodeId, memberId, experimentRecord, cb){
         let sql='SELECT `experiment_id` FROM `experiment` WHERE experiment_record_node_id=?';
         pool.query(sql, nodeId, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             newExperimentRecord(memberId, nodeId, results[0].experiment_id, experimentRecord)
             .then(function(data){
                 console.log(data);
@@ -975,7 +975,7 @@ module.exports = {
         addReadCount(nodeId, memberId, groupId, "attachment").then(function(){
             let sql="SELECT * FROM `node` n INNER JOIN `attachment` a ON n.node_id=a.node_id WHERE n.node_id=?";
             pool.query(sql, nodeId, function(err, results){
-                if(err) throw err;
+                if(err) return; //throw  err;
                 cb(results);
             });
         }); 
@@ -988,14 +988,14 @@ module.exports = {
             group_id: groupId
         }
         pool.query(sql, sqlValue, function(err){
-            if(err) throw err;
+            if(err) return; //throw  err;
             cb({finished: true});
         });
     },
     removeFavorite: function(nodeId, memberId, cb){
         let sql="DELETE FROM `favorite_idea` WHERE node_id=? AND member_id=?";
         pool.query(sql, [nodeId, memberId], function(err){
-            if(err) throw err;
+            if(err) return; //throw  err;
             cb({finished: true});
         });
 
@@ -1009,11 +1009,11 @@ module.exports = {
         let sql3="SELECT n.*, e.*, DATE_FORMAT(n.node_create_time, '%Y-%m-%d %T') AS create_time FROM `node` n INNER JOIN `experiment` e"
         +" ON n.node_id=e.node_id WHERE n.group_id=?";
         pool.query(sql, groupId, function(err, results1){
-            if(err) throw err;
+            if(err) return; //throw  err;
             pool.query(sql2, groupId, function(err, results2){
-                if(err) throw err;
+                if(err) return; //throw  err;
                 pool.query(sql3, groupId, function(err, results3){
-                    if(err) throw err;
+                    if(err) return; //throw  err;
                     getGroupDirectiveObservation(groupId).then(function(data){
                         directiveObservationData= data;
                         return getGroupOperationalObservation(groupId);                        
@@ -1036,7 +1036,7 @@ module.exports = {
         })
         // let sql="SELECT node_id, node_title, node_type FROM `node` WHERE group_id=? AND node_type IN ('directive_observation', 'operational_observation', 'experiment')ORDER BY node_type, node_id ASC";
         // pool.query(sql, groupId, function(err, results){
-        //     if(err) throw err;
+        //     if(err) return; //throw  err;
         //     getGroupDirectiveObservation(groupId).then(function(directiveObservationData){
         //         cb({practiceData: results, directiveObservationData: directiveObservationData});
         //     });
@@ -1099,7 +1099,7 @@ module.exports = {
         +' WHERE n.group_id=? AND (n.node_type= "idea" || n.node_type= "rise_above") AND m.member_identity="學生"'
         +' GROUP BY n.member_id, DATE_FORMAT(n.node_create_time, "%Y-%m-%d")';
         pool.query(sql, groupId, function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             cb(results);
         });
     },
@@ -1109,21 +1109,21 @@ module.exports = {
         +' INNER JOIN `idea` i ON n.node_id=i.node_id'
         +' WHERE fi.member_id=? AND fi.group_id=?';
         pool.query(sql, [memberId,groupId], function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             cb(results);
         });
     },
     getPersonalNote: function(groupId, memberId, cb){
         let sql='SELECT * FROM `personal_note` WHERE group_id=? AND member_id=?';
         pool.query(sql, [groupId, memberId], function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             cb(results[0]);
         });
     },
     savePersonalNote: function(groupId, memberId, noteContent, cb){
         let sql='UPDATE `personal_note` SET note_content=? WHERE group_id=? AND member_id=?';
         pool.query(sql, [noteContent, groupId, memberId], function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             cb({finished: true});
         });
     },
@@ -1144,7 +1144,7 @@ module.exports = {
         .then(function(attachmentId){
             let sql='SELECT * FROM `attachment` a INNER JOIN `member` m ON a.member_id=m.member_id WHERE a.attachment_id=?';
             pool.query(sql, attachmentId, function(err, results){
-                if(err) throw err;
+                if(err) return; //throw  err;
                 cb(results);
             });
         });
@@ -1153,7 +1153,7 @@ module.exports = {
         console.log(attachmentId);
         let sql='DELETE FROM `attachment` WHERE attachment_id=?';
         pool.query(sql, attachmentId, function(err){
-            if(err) throw err;
+            if(err) return; //throw  err;
             cb({finished: true});
         });
     },
@@ -1165,7 +1165,7 @@ module.exports = {
     checkAttachmentExist: function(attachmentName, groupId, cb){
         let sql= 'SELECT * FROM `attachment` WHERE attachment_name=? AND group_id=?';
         pool.query(sql, [attachmentName, groupId], function(err, results){
-            if(err) throw err;
+            if(err) return; //throw  err;
             console.log(results);
             let exists=(results.length>0?true:false);
             cb(exists);
@@ -1255,7 +1255,7 @@ module.exports = {
         return new Promise(function(resolve){
             let sql= 'SELECT group_name FROM `activity_group` WHERE group_id=?';
             pool.query(sql, groupId, function(err, results){
-                if(err) throw err;
+                if(err) return; //throw  err;
                 resolve(results[0].group_name);
             });
         });
@@ -1264,7 +1264,7 @@ module.exports = {
         return new Promise(function(resolve){
             let sql= 'SELECT *, DATE_FORMAT(broadcast_time, "%Y-%m-%d %T") AS time  FROM `broadcast` WHERE broadcast_group_id=? ORDER BY broadcast_time DESC LIMIT 5';
             pool.query(sql, groupId, function(err, results){
-                if(err) throw err;
+                if(err) return; //throw  err;
                 console.log(results);
                 resolve(results);
             });
@@ -1275,11 +1275,11 @@ module.exports = {
             let sql= 'UPDATE `'+recordType+'_record` SET '+recordType+'_record=? WHERE '+recordType+'_record_id=?';
             console.log(sql);
             pool.query(sql, [recordContent, recordId], function(err, results){
-                if(err) throw err;
+                if(err) return; //throw  err;
                 let sql2= 'SELECT *, '+recordType+'_record AS record, '+recordType+'_record_id AS record_id, DATE_FORMAT('+recordType+'_record_create_time, "%Y-%m-%d %T") AS record_create_time  FROM `'+recordType+'_record` WHERE '+recordType+'_record_id=?';
                 console.log(sql2);
                 pool.query(sql2, recordId, function(err, results){
-                    if(err) throw err;
+                    if(err) return; //throw  err;
                     resolve(results[0]);
                 });
             });
@@ -1291,7 +1291,7 @@ module.exports = {
             let sql= 'DELETE FROM `'+type+'` WHERE '+type+'_id=?';
             console.log(sql);
             pool.query(sql, recordId, function(err, results){
-                if(err) throw err;
+                if(err) return; //throw  err;
                 resolve(recordId);
             });
         });
